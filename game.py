@@ -11,6 +11,7 @@ class Game:
     MAIN_SCENE_INDEX = 1
     GAMEOVER_SCENE_INDEX = 2
     PAUSE_SCENE_INDEX = 3
+    HIGH_SCORE_MENU_SCENE_INDEX = 4
     current_scene_index = MENU_SCENE_INDEX
     USE_FPS_OVERLAY = False
 
