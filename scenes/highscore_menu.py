@@ -9,17 +9,27 @@ class HighScoreMenuScene(BaseScene):
         self.highscore = {
             'Jack': 5000,
             'Rechnoi': 4500,
+            'Ann': 3300,
+            'Robert': 3100,
+            'August': 3050,
+            'Ell': 2800,
+            'Elsa': 2000,
+            'S1mple': 1500,
+            'Bob': 1300,
             'Noob': 5
         }
         # key for key in self.highscore.keys()
         # value for value in self.highscore.values()
         self.highscore_table = TableObject(
             game=self.game,
-            title='Таблица рекордов',
+            title='10 лучших результатов',
             values={
+                'Место': [i for i in range(1, len(self.highscore) + 1)],
                 'Имя': [key for key in self.highscore.keys()],
                 'Очки': [value for value in self.highscore.values()]
-            }
+            },
+            x=self.game.WIDTH//2 - 250, y=20,
+            width=500, height=400
         )
         self.button_back = ButtonObject(
             self.game,

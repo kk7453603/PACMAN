@@ -14,10 +14,10 @@ class TableObject(DrawableObject):
                  header_color: Color = Color.RED,
                  header_is_italic: bool = True,
                  text_color: Color = Color.RED,
+                 width: int = 200, height: int = 500,
                  x: int = 100, y: int = 100) -> None:
         super().__init__(game)
-        self.x = x
-        self.y = y
+        self.rect = pygame.rect.Rect(x, y, width, height)
         self.title = title
         self.title_color = title_color
         self.title_is_bold = title_is_bold
@@ -32,7 +32,8 @@ class TableObject(DrawableObject):
             self.cells.append([value] + [str(val) for val in values[value]])
         self.texts_list = [[TextObject(game=self.game,
                                        text=self.title, is_bold=self.title_is_bold, color=self.title_color,
-                                       x=self.x+70, y=self.y)]]
+                                       x=self.rect.centerx, y=self.rect.y + 20)]]
+        print(self.rect.centerx, self.rect.x // 2)
         for (i, column) in enumerate(self.cells):
             self.texts_list.append([])
             for (j, cell) in enumerate(column):
@@ -40,10 +41,11 @@ class TableObject(DrawableObject):
                                                      is_bold=False,
                                                      color=self.header_color if j == 0 else self.text_color,
                                                      is_italic=self.header_is_italic if j == 0 else False,
-                                                     x=self.x + 150 * i,
-                                                     y=self.y + 40 + 30 * j))
+                                                     x=self.rect.x + self.rect.width // 6 + 150 * i,
+                                                     y=self.rect.y + 55 + 30 * j))
 
     def process_draw(self) -> None:
         for texts in self.texts_list:
             for text in texts:
                 text.process_draw()
+        pygame.draw.rect(self.game.screen, Color.RED, self.rect, 4)
