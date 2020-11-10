@@ -18,8 +18,6 @@ class HighScoreMenuScene(BaseScene):
             'Bob': 1300,
             'Noob': 5
         }
-        # key for key in self.highscore.keys()
-        # value for value in self.highscore.values()
         self.highscore_table = TableObject(
             game=self.game,
             title='10 лучших результатов',
