@@ -1,3 +1,5 @@
+import pygame
+
 from .image import ImageObject
 
 class SeedObject:
