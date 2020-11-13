@@ -3,20 +3,51 @@ import pygame
 from constants import Color
 from objects import TextObject
 from scenes import BaseScene
+from objects import ButtonObject
 
 
 class PauseScene(BaseScene):
     def create_objects(self) -> None:
         self.text = TextObject(
             game=self.game,
-            text='Game paused', color=Color.RED,
-            x=self.game.WIDTH // 2, y=self.game.HEIGHT // 2
+            text='Меню паузы', color=Color.RED,
+            x=self.game.WIDTH // 2, y=self.game.HEIGHT // 2 - 200
         )
+        self.button_resume = ButtonObject(
+            self.game,
+            self.game.WIDTH // 2 - 100, self.game.HEIGHT // 2 - 75, 200, 50,
+            Color.RED, self.go_menu, "Продолжить"
+        )
+        self.button_restart = ButtonObject(
+            self.game,
+            self.game.WIDTH // 2 - 100, self.game.HEIGHT // 2, 200, 50,
+            Color.RED, self.start_game, "Заново"
+        )
+        self.button_menu = ButtonObject(
+            self.game,
+            self.game.WIDTH // 2 - 100, self.game.HEIGHT // 2 + 75, 200, 50,
+            Color.RED, self.game.set_scene(self.game.MAIN_SCENE_INDEX, resume=True), "Меню"
+        )
+
         self.objects.append(self.text)
+        self.objects.append(self.button_resume)
+        self.objects.append(self.button_menu)
+        self.objects.append(self.button_restart)
+
+    def start_game(self) -> None:
+        self.game.set_scene(self.game.MAIN_SCENE_INDEX)
+
+    def go_menu(self) -> None:
+        pass
+#We'll come back later
+
+    def go_resume(self) -> None:
+        self.game.set_scene(self.game.MAIN_SCENE_INDEX, resume=True)
 
     def additional_event_check(self, event: pygame.event.Event) -> None:
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             self.game.set_scene(self.game.MAIN_SCENE_INDEX, resume=True)
 
     def on_window_resize(self) -> None:
-        self.text.move_center(x=self.game.WIDTH // 2, y=self.game.HEIGHT // 2)
+        self.button_resume.move(self.game.WIDTH // 2 - 100, self.game.HEIGHT // 2 - 20 - 25)
+
