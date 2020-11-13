@@ -4,7 +4,6 @@ class SeedObject:
     
     def __init__(self, game, type):
         super().__init__(game)
-        self.game = game
         self.type = type
         if type = 0:
             filename = 'images/map/point.png'
