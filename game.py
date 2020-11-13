@@ -74,6 +74,7 @@ class Game:
             self.process_all_draw()
             pygame.time.wait(10)
 
+
     def set_scene(self, index: int, resume: bool = False) -> None:
         if not resume:
             self.scenes[self.current_scene_index].on_deactivate()

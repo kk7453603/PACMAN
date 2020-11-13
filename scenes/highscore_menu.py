@@ -26,13 +26,16 @@ class HighScoreMenuScene(BaseScene):
                 'Имя': [key for key in self.highscore.keys()],
                 'Очки': [value for value in self.highscore.values()]
             },
+            header_color = Color.BLUE,
+            text_color = Color.BLUE,
             x=self.game.WIDTH//2 - 250, y=20,
             width=500, height=400
+
         )
         self.button_back = ButtonObject(
             self.game,
             self.game.WIDTH // 2 - 100, self.game.HEIGHT - 50 - 25, 200, 50,
-            Color.RED, self.back_to_menu, 'Назад'
+            Color.BLACK, self.back_to_menu, 'НАЗАД'
         )
         self.objects = [self.highscore_table, self.button_back]
 
