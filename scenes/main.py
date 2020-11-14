@@ -14,11 +14,17 @@ class MainScene(BaseScene):
 
     def create_objects(self) -> None:
         self.balls = [BallObject(self.game) for _ in range(MainScene.BALLS_COUNT)]
-        self.collision_count = 0
-        self.status_text = TextObject(self.game, text=self.get_collisions_text(), color=Color.RED, x=0, y=0)
-        self.status_text.move(10, 10)
+        self.nickname_text = 'Player'
+        self.lvl_count = 1
+        self.lives_count = 3
+        self.highscore_count = 0
+        self.nickname = TextObject(self.game, text=self.get_nickname_text(), color=Color.RED, x=0, y=0)
+        self.lvl = TextObject(self.game, text=self.get_lvl_text(), color=Color.RED, x=0, y=0)
+        self.lives = TextObject(self.game, text=self.get_lives_text(), color=Color.RED, x=0, y=0)
+        self.highscore = TextObject(self.game, text=self.get_highscore_text(), color=Color.RED, x=0, y=0)
+        self.update_texts()
         self.objects += self.balls
-        self.objects.append(self.status_text)
+        self.objects += [self.nickname, self.lvl, self.lives, self.highscore]
         self.reset_balls_position()
         self.set_random_unique_position()
 
@@ -45,12 +51,21 @@ class MainScene(BaseScene):
             while self.balls[index].rect.collidelist(other_rects) != -1:
                 self.set_random_position(self.balls[index])
 
+    def update_texts(self) -> None:
+        self.nickname.update_text(self.get_nickname_text())
+        self.nickname.move_center(self.game.WIDTH - self.nickname.rect.width//2 - 15, 15)
+        self.lvl.update_text(self.get_lvl_text())
+        self.lvl.move_center(15, 15)
+        self.lives.update_text(self.get_lives_text())
+        self.lives.move_center(15, self.game.HEIGHT - 15    )
+        self.highscore.update_text(self.get_highscore_text())
+        self.highscore.move_center(self.game.WIDTH//2, 15)
+
     def on_activate(self) -> None:
         self.collision_count = 0
         self.reset_balls_position()
         self.set_random_unique_position()
-        self.status_text.update_text(self.get_collisions_text())
-        self.status_text.move(10, 10)
+        self.update_texts()
 
     def check_ball_intercollisions(self) -> None:
         for i in range(len(self.balls) - 1):
@@ -58,15 +73,22 @@ class MainScene(BaseScene):
                 if self.balls[i].collides_with(self.balls[j]):
                     self.balls[i].bounce(self.balls[j])
 
-    def get_collisions_text(self) -> str:
-        return 'Wall collisions: {}/{}'.format(self.collision_count, MainScene.MAX_COLLISIONS)
+    def get_nickname_text(self) -> str:
+        return self.nickname_text
+
+    def get_lvl_text(self) -> str:
+        return str(self.lvl_count)
+
+    def get_lives_text(self) -> str:
+        return str(self.lives_count)
+
+    def get_highscore_text(self) -> str:
+        return str(self.highscore_count)
 
     def check_ball_edge_collision(self) -> None:
         for ball in self.balls:
             if ball.edge_collision():
                 self.collision_count += 1
-                self.status_text.update_text(self.get_collisions_text())
-                self.status_text.move(10, 10)
 
     def check_game_over(self) -> None:
         if self.collision_count >= MainScene.MAX_COLLISIONS:
