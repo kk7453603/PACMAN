@@ -33,3 +33,6 @@ class ScoreObject(TextObject):
     def starting_new_lvl(self) -> None:
         self.point_for_seed = 10
         self.point_for_ghost = 200
+
+    def get_score(self) -> int:
+        return self.score
