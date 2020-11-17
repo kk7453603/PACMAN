@@ -5,3 +5,4 @@ from .image import ImageObject
 from .text import TextObject
 from .pacman import PacmanObject
 from .ghost import GhostBase
+from .seed import SeedObject
