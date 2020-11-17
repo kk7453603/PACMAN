@@ -27,9 +27,7 @@ class GhostBase(CharacterObject):
 
     def __init__(self, game) -> None:
         super().__init__(game)
-
         self.image = self.up_img_resized
-
         self.status = 'normal'
 
     def test_move(self, status) -> None:
