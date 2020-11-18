@@ -5,3 +5,4 @@ from .image import ImageObject
 from .text import TextObject
 from .score import ScoreObject
 from .pacman import PacmanObject
+from .seed import SeedObject
