@@ -62,7 +62,7 @@ class PacmanObject(CharacterObject):
 
     def collect_seed(self, seeds, score):
         for i in seeds:
-            if self.collides_with(i):
+            if self.collides_with(i) and i.is_available():
                 i.collected()
                 i.disappearing()
                 score.seed_eaten()
