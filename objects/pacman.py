@@ -59,3 +59,11 @@ class PacmanObject(CharacterObject):
     def all_process(self) -> None:
         self.get_direction()
         self.move_to_direction()
+
+    def collect_seed(self, seeds, score):
+        for i in seeds:
+            if self.collides_with(i):
+                i.collected()
+                i.disappearing()
+                score.seed_eaten()
+
