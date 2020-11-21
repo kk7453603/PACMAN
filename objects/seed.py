@@ -9,9 +9,9 @@ class SeedObject(ImageObject):
         super().__init__(game)
         self.type = type
         if type == 0:
-            filename = 'images/map/point.png'
-        else:
-            filename = 'images/map/tablet.png'
-        self.image = pygame.image.load(filename)
+            self.filename = 'images/map/point.png'
+        elif type == 1:
+            self.filename = 'images/map/tablet.png'
+        self.image = pygame.image.load(self.filename)
         self.rect = self.image.get_rect()
 
