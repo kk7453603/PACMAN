@@ -8,3 +8,4 @@ from .ghost import GhostBase
 from .seed import SeedObject
 from .score import ScoreObject
 from .lives import LivesObject
+from .field import FieldObject
