@@ -67,3 +67,8 @@ class GhostBase(CharacterObject):
 
     def process_draw(self) -> None:
         self.game.screen.blit(self.image, self.rect)
+
+class Blue_ghost(GhostBase):
+    def __init__(self):
+        super().__init__()
+
