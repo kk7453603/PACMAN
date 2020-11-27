@@ -65,5 +65,3 @@ class GhostBase(CharacterObject):
         if self.status == 'scared':
             self.image = self.scared_img_resized
 
-    def process_draw(self) -> None:
-        self.game.screen.blit(self.image, self.rect)
