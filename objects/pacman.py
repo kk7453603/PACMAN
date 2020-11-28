@@ -2,7 +2,6 @@ import pygame
 
 from objects.character import CharacterObject
 
-
 class PacmanObject(CharacterObject):
     filename = 'images/pacman.png'
     image_copy = pygame.image.load(filename)
@@ -18,6 +17,8 @@ class PacmanObject(CharacterObject):
         self.speed[0] = 0
         self.speed[1] = 0
         self.radius = self.rect.width // 2
+        self.left_border = self.game.scenes[self.game.MAIN_SCENE_INDEX].field.rect.x
+        self.right_border = self.game.scenes[self.game.MAIN_SCENE_INDEX].field.rect.x + self.game.scenes[self.game.MAIN_SCENE_INDEX].field.cell_width
 
     def process_event(self, event: pygame.event.Event) -> None:
         if event.type == pygame.KEYDOWN:
@@ -55,6 +56,10 @@ class PacmanObject(CharacterObject):
         # self.rotate_image()
         self.rect.x += self.speed[0]
         self.rect.y += self.speed[1]
+        if self.rect.x < self.left_border:
+            self.rect.x = self.right_border
+        elif self.rect.x > self.right_border:
+            self.rect.x = self.left_border
 
     def process_logic(self) -> None:
         self.move_to_direction()
