@@ -17,8 +17,10 @@ class PacmanObject(CharacterObject):
         self.speed[0] = 0
         self.speed[1] = 0
         self.radius = self.rect.width // 2
-        self.left_border = self.game.scenes[self.game.MAIN_SCENE_INDEX].field.rect.x
-        self.right_border = self.game.scenes[self.game.MAIN_SCENE_INDEX].field.rect.x + self.game.scenes[self.game.MAIN_SCENE_INDEX].field.cell_width
+        #self.left_border = self.game.scenes[1].field.rect.x
+        #self.right_border = self.game.scenes[1].field.rect.x + self.game.scenes[1].field.cell_width
+        self.left_border = 150
+        self.right_border = 626
 
     def process_event(self, event: pygame.event.Event) -> None:
         if event.type == pygame.KEYDOWN:
