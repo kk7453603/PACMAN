@@ -1,6 +1,6 @@
 import pygame
 
-from objects import FieldObject
+from objects import FieldObject, PacmanObject
 from constants import Color
 from objects import TextObject, ScoreObject, LivesObject
 from scenes import BaseScene
@@ -24,6 +24,10 @@ class MainScene(BaseScene):
         self.objects += [self.nickname, self.lvl, self.score, self.lives, self.highscore]
         self.field = FieldObject(self.game, 150, 35, 17, 17)
         self.objects.append(self.field)
+
+        self.pacman = PacmanObject(self.game, 300, 400)
+        self.objects.append(self.pacman)
+
 
     def update_texts(self) -> None:
         self.nickname.update_text(self.get_nickname_text())
