@@ -6,7 +6,6 @@ import pygame
 from constants import Color
 from objects import BallObject, TextObject, ScoreObject, LivesObject
 from scenes import BaseScene
-from objects import GhostBase
 
 
 class MainScene(BaseScene):
