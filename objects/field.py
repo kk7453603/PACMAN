@@ -1,3 +1,5 @@
+from typing import List
+
 import pygame
 
 from objects.base import DrawableObject
@@ -14,7 +16,7 @@ class FieldObject(DrawableObject):
         self.cell_height = cell_height
         self.rect = pygame.rect.Rect(x, y, self.cell_width * len(self.field[0]), self.cell_height * len(self.field))
 
-    def get_pathways(self) -> [[pygame.rect.Rect()]]:
+    def get_pathways(self) -> List[pygame.rect.Rect]:
         pathways = []
         for (i, row) in enumerate(self.field):
             for (j, cell) in enumerate(row):
@@ -24,7 +26,7 @@ class FieldObject(DrawableObject):
                     pathways.append(pygame.rect.Rect(x, y, self.cell_width, self.cell_height))
         return pathways
 
-    def get_walls(self) -> [[pygame.rect.Rect()]]:
+    def get_walls(self) -> List[pygame.rect.Rect]:
         walls = []
         for (i, row) in enumerate(self.field):
             for (j, cell) in enumerate(row):
