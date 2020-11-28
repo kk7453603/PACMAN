@@ -68,7 +68,23 @@ class GhostBase(CharacterObject):
     def process_draw(self) -> None:
         self.game.screen.blit(self.image, self.rect)
 
+
 class Blue_ghost(GhostBase):
     def __init__(self):
         super().__init__()
+
+    def get_route(self, pacman, blinky, mapp):
+        vector = [0, 0]
+        # 2 точки после пакмана
+        if mapp[pacman.x + 2] != 0:
+            new_x = pacman.x + 2
+            new_y = pacman.y
+        else:
+            new_x = pacman.x
+            new_y = pacman.y + 2
+        # 2*вектор блики
+        vector[0]=2*(new_x-blinky.x)
+        vector[1]=2*(new_y-blinky.y)
+        return vector
+
 
