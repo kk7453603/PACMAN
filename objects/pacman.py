@@ -5,12 +5,11 @@ from objects.character import CharacterObject
 
 class PacmanObject(CharacterObject):
     filename = 'images/pacman.png'
-    image_copy = pygame.image.load(filename)
-    image_copy = pygame.transform.scale(image_copy, (150, 150))
-    image = image_copy
 
     def __init__(self, game, x: int = 0, y: int = 0) -> None:
         super().__init__(game, x, y)
+        self.image_copy = pygame.transform.scale(pygame.image.load(self.filename), (17, 17))
+        self.image = self.image_copy
         self.rotated_image = self.image_copy
         self.direction = "NONE"
         self.angle = 0
@@ -18,7 +17,7 @@ class PacmanObject(CharacterObject):
         self.speed[1] = 0
         self.radius = self.rect.width // 2
 
-    def get_direction(self, event) -> None:
+    def process_event(self, event: pygame.event.Event) -> None:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_w or event.key == pygame.K_UP:
                 self.direction = "UP"
@@ -55,6 +54,12 @@ class PacmanObject(CharacterObject):
         self.rect.x += self.speed[0]
         self.rect.y += self.speed[1]
 
-    def all_process(self, event) -> None:
-        self.get_direction(event)
+    def process_logic(self) -> None:
         self.move_to_direction()
+
+    def collect_seed(self, seeds, score):
+        for i in seeds:
+            if self.collides_with(i) and i.is_available():
+                i.collected()
+                i.disappearing()
+                score.seed_eaten()
