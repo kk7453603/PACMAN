@@ -26,7 +26,7 @@ class PauseScene(BaseScene):
         self.button_menu = ButtonObject(
             self.game,
             self.game.WIDTH // 2 - 100, self.game.HEIGHT // 2 + 75, 200, 50,
-            Color.RED, self.game.set_scene(self.game.MAIN_SCENE_INDEX, resume=True), "Меню"
+            Color.RED, self.back_to_menu, "Меню"
         )
 
         self.objects.append(self.text)
@@ -38,11 +38,10 @@ class PauseScene(BaseScene):
         self.game.set_scene(self.game.MAIN_SCENE_INDEX)
 
     def go_menu(self) -> None:
-        pass
-#We'll come back later
+        self.game.set_scene(self.game.MAIN_SCENE_INDEX, resume=True)
 
     def go_resume(self) -> None:
-        self.game.set_scene(self.game.MAIN_SCENE_INDEX, resume=True)
+        self.game.set_scene(self.game.MAIN_SCENE_INDEX, resume=False)
 
     def additional_event_check(self, event: pygame.event.Event) -> None:
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
@@ -51,3 +50,5 @@ class PauseScene(BaseScene):
     def on_window_resize(self) -> None:
         self.button_resume.move(self.game.WIDTH // 2 - 100, self.game.HEIGHT // 2 - 20 - 25)
 
+    def back_to_menu(self):
+        self.game.set_scene(self.game.MENU_SCENE_INDEX, resume=True)
