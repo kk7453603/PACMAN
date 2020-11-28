@@ -1,10 +1,8 @@
-from random import randint
-from typing import Tuple
-
 import pygame
 
+from objects import FieldObject
 from constants import Color
-from objects import BallObject, TextObject, ScoreObject, LivesObject
+from objects import TextObject, ScoreObject, LivesObject
 from scenes import BaseScene
 
 
@@ -13,9 +11,9 @@ class MainScene(BaseScene):
     BALLS_COUNT = 3
 
     def create_objects(self) -> None:
-        self.balls = [BallObject(self.game) for _ in range(MainScene.BALLS_COUNT)]
         self.nickname_text = 'Player'
         self.lvl_count = 1
+        self.lives_count = 3
         self.highscore_count = 0
         self.nickname = TextObject(self.game, text=self.get_nickname_text(), color=Color.RED, x=0, y=0)
         self.lvl = TextObject(self.game, text=self.get_lvl_text(), color=Color.RED, x=0, y=0)
@@ -23,10 +21,9 @@ class MainScene(BaseScene):
         self.lives = LivesObject(self.game, x=15, y=self.game.HEIGHT - 30)
         self.highscore = TextObject(self.game, text=self.get_highscore_text(), color=Color.RED, x=0, y=0)
         self.update_texts()
-        self.objects += self.balls
         self.objects += [self.nickname, self.lvl, self.score, self.lives, self.highscore]
-        self.reset_balls_position()
-        self.set_random_unique_position()
+        self.field = FieldObject(self.game, 150, 35, 17, 17)
+        self.objects.append(self.field)
 
     def update_texts(self) -> None:
         self.nickname.update_text(self.get_nickname_text())
@@ -38,33 +35,12 @@ class MainScene(BaseScene):
         self.highscore.update_text(self.get_highscore_text())
         self.highscore.move_center(self.game.WIDTH//2, 15)
 
-    def process_event(self, event: pygame.event.Event) -> None:
+    def additional_event_check(self, event: pygame.event.Event) -> None:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 self.game.set_scene(self.game.PAUSE_SCENE_INDEX)
 
-    def get_random_position(self, radius: int) -> Tuple[int, int]:
-        return randint(10, self.game.WIDTH - radius * 2 - 10), randint(10, self.game.HEIGHT - radius * 2 - 10)
-
-    def set_random_position(self, ball: BallObject) -> None:
-        pos = self.get_random_position(ball.radius)
-        ball.move(*pos)
-
-    def reset_balls_position(self) -> None:
-        for ball in self.balls:
-            ball.move(self.game.WIDTH, self.game.HEIGHT)
-
-    def set_random_unique_position(self) -> None:
-        for index in range(len(self.balls)):
-            other_rects = [self.balls[i].rect for i in range(len(self.balls)) if i != index]
-            self.set_random_position(self.balls[index])
-            while self.balls[index].rect.collidelist(other_rects) != -1:
-                self.set_random_position(self.balls[index])
-
     def on_activate(self) -> None:
-        self.collision_count = 0
-        self.reset_balls_position()
-        self.set_random_unique_position()
         self.update_texts()
 
     def get_nickname_text(self) -> str:
@@ -79,17 +55,6 @@ class MainScene(BaseScene):
     def get_highscore_text(self) -> str:
         return 'Лучший результат: {}'.format(self.highscore_count)
 
-    def check_ball_intercollisions(self) -> None:
-        for i in range(len(self.balls) - 1):
-            for j in range(i + 1, len(self.balls)):
-                if self.balls[i].collides_with(self.balls[j]):
-                    self.balls[i].bounce(self.balls[j])
-
-    def check_ball_edge_collision(self) -> None:
-        for ball in self.balls:
-            if ball.edge_collision():
-                self.score.seed_eaten()
-
     def check_score(self) -> None:
         if self.score.get_score() >= (self.lives.get_max_lives_count() - self.lives.get_lives_count() + 1) * 100:
             self.lives.reduce_lives()
@@ -99,7 +64,5 @@ class MainScene(BaseScene):
             self.game.set_scene(self.game.GAMEOVER_SCENE_INDEX)
 
     def additional_logic(self) -> None:
-        self.check_ball_intercollisions()
-        self.check_ball_edge_collision()
         self.check_score()
         self.check_game_over()

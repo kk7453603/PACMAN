@@ -4,6 +4,8 @@ from objects.base import DrawableObject
 
 
 class ImageObject(DrawableObject):
+    filename = None
+
     def __init__(self, game, filename: str = None, x: int = None, y: int = None) -> None:
         super().__init__(game)
         if filename:
