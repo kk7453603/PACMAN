@@ -12,3 +12,4 @@ class Color:
     WHITE = pygame.color.Color('white')
     ORANGE = pygame.color.Color('orange')
     YELLOW = pygame.color.Color('yellow')
+    CYAN = pygame.color.Color('cyan')

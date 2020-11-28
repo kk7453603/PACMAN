@@ -42,9 +42,9 @@ class FieldObject(DrawableObject):
                 if cell == 0:
                     color = Color.WHITE
                 elif cell == 1:
-                    color = Color.GREEN
-                elif cell == 2:
                     color = Color.BLUE
+                elif cell == 2:
+                    color = Color.CYAN
                 x = self.rect.x + self.cell_width * j
                 y = self.rect.y + self.cell_height * i
                 pygame.draw.rect(self.game.screen, color, (x, y, self.cell_width, self.cell_height))
