@@ -59,8 +59,8 @@ class PacmanObject(CharacterObject):
         self.rect.x += self.speed[0]
         self.rect.y += self.speed[1]
         if self.rect.x < self.left_border:
-            self.rect.x = self.right_border
-        elif self.rect.x > self.right_border:
+            self.rect.x = self.right_border - 10
+        elif self.rect.x > self.right_border - 10:
             self.rect.x = self.left_border
 
     def process_logic(self) -> None:
