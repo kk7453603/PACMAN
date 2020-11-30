@@ -5,13 +5,11 @@ from objects.character import CharacterObject
 
 class PacmanObject(CharacterObject):
     filename = 'images/pacman.png'
-    image_copy = pygame.image.load(filename)
 
     def __init__(self, game, x: int = 0, y: int = 0) -> None:
         super().__init__(game, x, y)
-        image_copy = pygame.transform.scale(self.image_copy, (17, 17))
-        self.image = image_copy
-        # self.image_copy = self.image
+        self.image_copy = pygame.transform.scale(pygame.image.load(self.filename), (17, 17))
+        self.image = self.image_copy
         self.rotated_image = self.image_copy
         self.direction = "NONE"
         self.angle = 0
@@ -52,7 +50,7 @@ class PacmanObject(CharacterObject):
         self.image = self.rotated_image
 
     def move_to_direction(self) -> None:
-        # self.rotate_image()
+        self.rotate_image()
         self.rect.x += self.speed[0]
         self.rect.y += self.speed[1]
 
