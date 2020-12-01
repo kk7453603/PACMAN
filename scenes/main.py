@@ -25,7 +25,7 @@ class MainScene(BaseScene):
         self.field = FieldObject(self.game, 150, 35, 17, 17)
         self.objects.append(self.field)
 
-        self.pacman = PacmanObject(self.game, 300, 400)
+        self.pacman = PacmanObject(self.game, 30, 95)
         self.objects.append(self.pacman)
 
 
