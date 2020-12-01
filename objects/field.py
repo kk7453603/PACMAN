@@ -46,3 +46,6 @@ class FieldObject(DrawableObject):
                 x = self.rect.x + self.cell_width * j
                 y = self.rect.y + self.cell_height * i
                 pygame.draw.rect(self.game.screen, color, (x, y, self.cell_width, self.cell_height))
+
+    def get_borders_cell(self):
+        return self.rect.x, self.rect.x + len(self.field[0]) * self.cell_width, self.cell_width

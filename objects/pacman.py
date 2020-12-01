@@ -2,7 +2,6 @@ import pygame
 
 from objects.character import CharacterObject
 
-
 class PacmanObject(CharacterObject):
     filename = 'images/pacman.png'
 
@@ -51,6 +50,7 @@ class PacmanObject(CharacterObject):
 
     def move_to_direction(self) -> None:
         self.rotate_image()
+        self.portal_event()
         self.rect.x += self.speed[0]
         self.rect.y += self.speed[1]
 
