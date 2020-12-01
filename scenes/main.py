@@ -2,7 +2,7 @@ import pygame
 
 from objects import FieldObject, PacmanObject
 from constants import Color
-from objects import TextObject, ScoreObject, LivesObject
+from objects import TextObject, ScoreObject, LivesObject, SeedObject
 from scenes import BaseScene
 
 
@@ -24,6 +24,7 @@ class MainScene(BaseScene):
         self.objects += [self.nickname, self.lvl, self.score, self.lives, self.highscore]
         self.field = FieldObject(self.game, 150, 35, 17, 17)
         self.objects.append(self.field)
+        self.objects = self.field.add_seeds(self.objects)
 
         self.pacman = PacmanObject(self.game, 30, 95)
         self.objects.append(self.pacman)

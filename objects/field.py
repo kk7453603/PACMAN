@@ -5,6 +5,7 @@ import pygame
 from objects.base import DrawableObject
 from fields.default import fieldArr
 from constants import Color
+from .seed import SeedObject
 
 
 class FieldObject(DrawableObject):
@@ -41,8 +42,24 @@ class FieldObject(DrawableObject):
             for (j, cell) in enumerate(row):
                 if cell == 0:
                     color = Color.BLUE
-                elif cell == 1:
+                elif cell == 1 or 2:
                     color = Color.WHITE
                 x = self.rect.x + self.cell_width * j
                 y = self.rect.y + self.cell_height * i
                 pygame.draw.rect(self.game.screen, color, (x, y, self.cell_width, self.cell_height))
+
+    def add_seeds(self,obj):
+        for (i, row) in enumerate(self.field):
+            for (j, cell) in enumerate(row):
+                if cell == 0:
+                    pass
+                elif cell == 2:
+                    pass
+                elif cell == 1:
+                    x = self.rect.x + self.cell_width * j
+                    y = self.rect.y + self.cell_height * i
+                    x += 6
+                    y += 6
+                    # Смещаем,чтобы зерно было в центре клетки
+                    obj.append(SeedObject(self.game,0,x,y))
+        return obj
