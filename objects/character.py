@@ -18,3 +18,10 @@ class CharacterObject(ImageObject):
 
     def collides_with(self, other) -> bool:
         return pygame.sprite.collide_circle(self, other)
+
+    def portal_event(self):
+        left_border, right_border = self.game.scenes[self.game.MAIN_SCENE_INDEX].field.get_borders()
+        if self.rect.x < left_border:
+            self.rect.x = right_border - 17
+        elif self.rect.x > right_border - 17:
+            self.rect.x = left_border

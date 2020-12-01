@@ -17,10 +17,6 @@ class PacmanObject(CharacterObject):
         self.speed[0] = 0
         self.speed[1] = 0
         self.radius = self.rect.width // 2
-        self.left_border = self.game.scenes[1].field.rect.x
-        self.right_border = self.game.scenes[1].field.rect.x + self.game.scenes[1].field.cell_width * len(self.game.scenes[1].field.field[0])
-        #self.left_border = 150
-        #self.right_border = 626
 
     def process_event(self, event: pygame.event.Event) -> None:
         if event.type == pygame.KEYDOWN:
@@ -56,12 +52,9 @@ class PacmanObject(CharacterObject):
 
     def move_to_direction(self) -> None:
         # self.rotate_image()
+        self.portal_event()
         self.rect.x += self.speed[0]
         self.rect.y += self.speed[1]
-        if self.rect.x < self.left_border:
-            self.rect.x = self.right_border - 10
-        elif self.rect.x > self.right_border - 10:
-            self.rect.x = self.left_border
 
     def process_logic(self) -> None:
         self.move_to_direction()
