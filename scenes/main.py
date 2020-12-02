@@ -2,7 +2,7 @@ import pygame
 
 from objects import FieldObject, PacmanObject
 from constants import Color
-from objects import TextObject, ScoreObject, LivesObject, SeedObject
+from objects import TextObject, ScoreObject, LivesObject
 from scenes import BaseScene
 
 
@@ -25,20 +25,18 @@ class MainScene(BaseScene):
         self.field = FieldObject(self.game, 150, 35, 17, 17)
         self.objects.append(self.field)
         self.objects = self.field.add_seeds(self.objects)
-
         self.pacman = PacmanObject(self.game, 30, 95)
         self.objects.append(self.pacman)
 
-
     def update_texts(self) -> None:
         self.nickname.update_text(self.get_nickname_text())
-        self.nickname.move_center(self.game.WIDTH - self.nickname.rect.width//2 - 15, 15)
+        self.nickname.move_center(self.game.WIDTH - self.nickname.rect.width // 2 - 15, 15)
         self.lvl.update_text(self.get_lvl_text())
         self.lvl.move_center(60, 15)
         self.score.move_center(60, 40)
         self.lives.move_center(15, self.game.HEIGHT - 15)
         self.highscore.update_text(self.get_highscore_text())
-        self.highscore.move_center(self.game.WIDTH//2, 15)
+        self.highscore.move_center(self.game.WIDTH // 2, 15)
 
     def additional_event_check(self, event: pygame.event.Event) -> None:
         if event.type == pygame.KEYDOWN:
