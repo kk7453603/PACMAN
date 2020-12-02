@@ -6,7 +6,7 @@ from scenes.overlay import OverlayScene
 
 
 class Game:
-    SIZE = WIDTH, HEIGHT = 800, 600
+    SIZE = WIDTH, HEIGHT = 600, 600
     MENU_SCENE_INDEX = 0
     MAIN_SCENE_INDEX = 1
     GAMEOVER_SCENE_INDEX = 2

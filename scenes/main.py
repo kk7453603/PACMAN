@@ -22,10 +22,10 @@ class MainScene(BaseScene):
         self.highscore = TextObject(self.game, text=self.get_highscore_text(), color=Color.RED, x=0, y=0)
         self.update_texts()
         self.objects += [self.nickname, self.lvl, self.score, self.lives, self.highscore]
-        self.field = FieldObject(self.game, 150, 35, 17, 17)
+        self.field = FieldObject(self.game, 70, 35, 17, 17)
         self.objects.append(self.field)
 
-        self.pacman = PacmanObject(self.game, 30, 95)
+        self.pacman = PacmanObject(self.game, -45, 95)
         self.objects.append(self.pacman)
 
 
