@@ -18,22 +18,22 @@ class PacmanObject(CharacterObject):
 
     def process_event(self, event: pygame.event.Event) -> None:
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_w or event.key == pygame.K_UP:
+            if event.key == pygame.K_w: # or event.key == pygame.K_UP:
                 self.direction = "UP"
                 self.angle = 270
                 self.speed[0] = 0
                 self.speed[1] = -2
-            elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
+            elif event.key == pygame.K_s: # or event.key == pygame.K_DOWN:
                 self.direction = "DOWN"
                 self.angle = 90
                 self.speed[0] = 0
                 self.speed[1] = 2
-            elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
+            elif event.key == pygame.K_a: # or event.key == pygame.K_LEFT:
                 self.direction = "LEFT"
                 self.angle = 0
                 self.speed[0] = -2
                 self.speed[1] = 0
-            elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+            elif event.key == pygame.K_d: # or event.key == pygame.K_RIGHT:
                 self.direction = "RIGHT"
                 self.angle = 180
                 self.speed[0] = 2
@@ -53,6 +53,10 @@ class PacmanObject(CharacterObject):
         self.portal_event()
         self.rect.x += self.speed[0]
         self.rect.y += self.speed[1]
+
+    def ghost_collision_check(self, ghost):
+        if ghost.rect.colliderect(self.rect):
+            print('Collision')
 
     def process_logic(self) -> None:
         self.move_to_direction()

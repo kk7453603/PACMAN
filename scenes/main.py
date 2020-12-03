@@ -1,6 +1,6 @@
 import pygame
 
-from objects import FieldObject, PacmanObject
+from objects import FieldObject, PacmanObject, GhostBase
 from constants import Color
 from objects import TextObject, ScoreObject, LivesObject
 from scenes import BaseScene
@@ -20,14 +20,14 @@ class MainScene(BaseScene):
         self.score = ScoreObject(self.game, color=Color.RED)
         self.lives = LivesObject(self.game, x=15, y=self.game.HEIGHT - 30)
         self.highscore = TextObject(self.game, text=self.get_highscore_text(), color=Color.RED, x=0, y=0)
+        self.ghost = GhostBase(self.game)
         self.update_texts()
         self.objects += [self.nickname, self.lvl, self.score, self.lives, self.highscore]
         self.field = FieldObject(self.game, 70, 35, 17, 17)
         self.objects.append(self.field)
-
         self.pacman = PacmanObject(self.game, -45, 95)
         self.objects.append(self.pacman)
-
+        self.objects.append(self.ghost)
 
     def update_texts(self) -> None:
         self.nickname.update_text(self.get_nickname_text())
@@ -68,5 +68,6 @@ class MainScene(BaseScene):
             self.game.set_scene(self.game.GAMEOVER_SCENE_INDEX)
 
     def additional_logic(self) -> None:
+        self.pacman.ghost_collision_check(self.ghost)
         self.check_score()
         self.check_game_over()
