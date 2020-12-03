@@ -73,12 +73,6 @@ class MainScene(BaseScene):
     def on_activate(self) -> None:
         self.update_texts()
 
-    def pacman_ghost_collision(self, pacman, ghost):
-        if pacman.rect.colliderect(ghost.rect):
-            if ghost.status == 'scared':
-                self.score.ghost_eaten()
-                self.ghost.moving_home = True
-
     def get_nickname_text(self) -> str:
         return self.nickname_text
 
@@ -102,6 +96,6 @@ class MainScene(BaseScene):
             self.game.set_scene(self.game.GAMEOVER_SCENE_INDEX)
 
     def additional_logic(self) -> None:
-        self.pacman_ghost_collision(self.pacman, self.ghost)
-    #    self.check_score()
+        self.ghost.pacman_scare_collision(self.pacman, self.score)
+        #    self.check_score()
         self.check_game_over()

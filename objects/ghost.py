@@ -166,6 +166,12 @@ class GhostBase(CharacterObject):
             self.get_path_to_home()
             self.move_home()
 
+    def pacman_scare_collision(self, pacman, score):
+        if pacman.rect.colliderect(self.rect):
+            if self.status == 'scared':
+                score.ghost_eaten()
+                self.moving_home = True
+
     def process_logic(self) -> None:
         pygame.event.pump()
         keys = pygame.key.get_pressed()
