@@ -42,7 +42,7 @@ class FieldObject(DrawableObject):
             for (j, cell) in enumerate(row):
                 if cell == 0:
                     color = Color.BLUE
-                elif cell == 1 or 2:
+                elif cell == 1 or 2 or 3:
                     color = Color.WHITE
                 x = self.rect.x + self.cell_width * j
                 y = self.rect.y + self.cell_height * i
@@ -58,8 +58,15 @@ class FieldObject(DrawableObject):
                 elif cell == 1:
                     x = self.rect.x + self.cell_width * j
                     y = self.rect.y + self.cell_height * i
-                    x += 6
-                    y += 6
+                    x += 7
+                    y += 7
                     # Смещаем,чтобы зерно было в центре клетки
                     obj.append(SeedObject(self.game,0,x,y))
+                elif cell == 3:
+                    x = self.rect.x + self.cell_width * j
+                    y = self.rect.y + self.cell_height * i
+                    x += 4
+                    y += 4
+                    # Смещаем,чтобы зерно было в центре клетки
+                    obj.append(SeedObject(self.game,1,x,y))
         return obj

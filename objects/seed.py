@@ -8,16 +8,15 @@ class SeedObject(CharacterObject):
 
     def __init__(self, game, type ,x: int = 0, y: int = 0):
         self.type = type
-        self.image_copy = pygame.transform.scale(pygame.image.load(self.filename), (4, 4))
-        self.image = self.image_copy
         if self.type == 0:
             self.filename = 'images/map/point.png'
+            self.image_copy = pygame.transform.scale(pygame.image.load(self.filename), (5, 5))
         elif self.type == 1:
             self.filename = 'images/map/tablet.png'
+            self.image_copy = pygame.transform.scale(pygame.image.load(self.filename), (8, 8))
+        self.image = self.image_copy
         self.rect = self.image.get_rect()
         super().__init__(game, x, y)
-        self.image = self.image_copy
-        self.image = self.image_copy
         self.isAvailable = True
         self.isCollected = False
 
