@@ -59,10 +59,7 @@ class MainScene(BaseScene):
         return 'Лучший результат: {}'.format(self.highscore_count)
 
     def check_score(self) -> None:
-        # я без понятия какой гений додумался уменьшать жизни от очков,но если что,
-        # проблема быстрого завершения игры в этих строках
-        if self.score.get_score() >= (self.lives.get_max_lives_count() - self.lives.get_lives_count() + 1) * 100:
-            self.lives.reduce_lives()
+        pass
 
     def check_game_over(self) -> None:
         if not self.lives.get_live_status():
