@@ -5,8 +5,9 @@ from .ghost import GhostBase
 
 
 class Blue_ghost(GhostBase):
-    def __init__(self):
-        super().__init__()
+    def __init__(self,game,x,y):
+        super().__init__(game,x,y)
+
 
     def get_route(self, pacman, blinky, mapp):
         vector = [0, 0]
@@ -33,3 +34,6 @@ class Blue_ghost(GhostBase):
             elif mapp[vector[0]][vector[1]-1]==1:
                 vector[1]-=1
             return vector
+
+    def process_draw(self):
+        self.game.screen.blit(self.image, self.rect)

@@ -8,3 +8,4 @@ from .ghost import GhostBase
 from .seed import SeedObject
 from .score import ScoreObject
 from .lives import LivesObject
+from .blue_ghost import Blue_ghost

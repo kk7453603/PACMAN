@@ -25,8 +25,8 @@ class GhostBase(CharacterObject):
     right_img_resized = pygame.transform.scale(right_img, (35, 35))
     scared_img_resized = pygame.transform.scale(scared_img, (35, 35))
 
-    def __init__(self, game) -> None:
-        super().__init__(game)
+    def __init__(self, game,x,y) -> None:
+        super().__init__(game,x,y)
         self.image = self.up_img_resized
         self.status = 'normal'
 
@@ -65,5 +65,5 @@ class GhostBase(CharacterObject):
         if self.status == 'scared':
             self.image = self.scared_img_resized
 
-    def process_draw(self) -> None:
+    def process_draw(self):
         self.game.screen.blit(self.image, self.rect)
