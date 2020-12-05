@@ -65,3 +65,7 @@ class GhostBase(CharacterObject):
         if self.status == 'scared':
             self.image = self.scared_img_resized
 
+    def get_scared_status(self):
+        if self.status == 'scared':
+            return True
+        return False
