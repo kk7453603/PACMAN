@@ -46,8 +46,8 @@ class PacmanObject(CharacterObject):
         self.image = self.rotated_image
 
     def move_to_direction(self):
-        self.sec += 1
-        if self.sec % self.tick == 0:
+        self.sec += 2
+        if self.sec % self.tick == 1:
             if self.pressed == 'left':
                 if self.pos_on_field[self.cell[0]][self.cell[1] - 1][2] != 0:
                     self.cell[1] -= 1

@@ -56,13 +56,13 @@ class MainScene(BaseScene):
                     self.ghost.pressed = 'up'
                 if event.key == pygame.K_DOWN:
                     self.ghost.pressed = 'down'
-                if event.key == pygame.K_a:
+                if event.key == pygame.K_a and self.pacman.pos_on_field[self.pacman.cell[0]][self.pacman.cell[1] - 1][2] != 0:
                     self.pacman.pressed = 'left'
-                if event.key == pygame.K_d:
+                if event.key == pygame.K_d and self.pacman.pos_on_field[self.pacman.cell[0]][self.pacman.cell[1] + 1][2] != 0:
                     self.pacman.pressed = 'right'
-                if event.key == pygame.K_w:
+                if event.key == pygame.K_w and self.pacman.pos_on_field[self.pacman.cell[0] - 1][self.pacman.cell[1]][2] != 0:
                     self.pacman.pressed = 'up'
-                if event.key == pygame.K_s:
+                if event.key == pygame.K_s and self.pacman.pos_on_field[self.pacman.cell[0] + 1][self.pacman.cell[1]][2] != 0:
                     self.pacman.pressed = 'down'
             elif event.type == pygame.KEYUP:
                 self.ghost.pressed = 'none'
