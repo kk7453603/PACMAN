@@ -17,6 +17,7 @@ class TextObject(DrawableObject):
         self.font = pygame.font.SysFont(self.font_name, self.font_size, self.is_bold, self.is_italic)
         self.rect = pygame.rect.Rect(x, y, 10, 10)
         self.update_text(text)
+        self.obj_type = "text"
 
     def update_text(self, text: str) -> None:
         self.text = text
@@ -25,6 +26,9 @@ class TextObject(DrawableObject):
         y = self.rect.centery
         self.rect = self.surface.get_rect()
         self.move_center(x, y)
+
+    def get_type(self) -> str:
+        return self.obj_type
 
     def process_draw(self) -> None:
         self.game.screen.blit(self.surface, self.rect)

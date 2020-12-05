@@ -25,7 +25,7 @@ class MainScene(BaseScene):
         self.field = FieldObject(self.game, 70, 35, 17, 17)
         self.objects.append(self.field)
         self.objects = self.field.add_seeds(self.objects)
-        self.pacman = PacmanObject(self.game, 30, 95)
+        self.pacman = PacmanObject(self.game, 300, 425)
         self.objects.append(self.pacman)
 
     def update_texts(self) -> None:
@@ -59,6 +59,8 @@ class MainScene(BaseScene):
         return 'Лучший результат: {}'.format(self.highscore_count)
 
     def check_score(self) -> None:
+        # я без понятия какой гений додумался уменьшать жизни от очков,но если что,
+        # проблема быстрого завершения игры в этих строках
         if self.score.get_score() >= (self.lives.get_max_lives_count() - self.lives.get_lives_count() + 1) * 100:
             self.lives.reduce_lives()
 
@@ -67,5 +69,6 @@ class MainScene(BaseScene):
             self.game.set_scene(self.game.GAMEOVER_SCENE_INDEX)
 
     def additional_logic(self) -> None:
+        self.pacman.collect_seed(self.objects, self.score)
         self.check_score()
         self.check_game_over()

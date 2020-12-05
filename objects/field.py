@@ -15,7 +15,11 @@ class FieldObject(DrawableObject):
         super().__init__(game)
         self.cell_width = cell_width
         self.cell_height = cell_height
+        self.obj_type = "filed"
         self.rect = pygame.rect.Rect(x, y, self.cell_width * len(self.field[0]), self.cell_height * len(self.field))
+
+    def get_type(self) -> str:
+        return self.obj_type
 
     def get_pathways(self) -> List[pygame.rect.Rect]:
         pathways = []

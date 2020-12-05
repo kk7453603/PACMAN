@@ -11,6 +11,10 @@ class ScoreObject(TextObject):
         self.point_for_energizer = 50
         self.point_for_ghost = 200
         self.update_score()
+        self.obj_type = "score"
+
+    def get_type(self) -> str:
+        return self.obj_type
 
     def update_score(self) -> None:
         self.update_text(str(self.score))

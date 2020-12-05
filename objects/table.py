@@ -25,6 +25,10 @@ class TableObject(DrawableObject):
         self.header_is_italic = header_is_italic
         self.text_color = text_color
         self.update_table(values)
+        self.obj_type = "table"
+
+    def get_type(self) -> str:
+        return self.obj_type
 
     def update_table(self, values: list) -> None:
         self.cells = []

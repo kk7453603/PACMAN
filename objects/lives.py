@@ -14,6 +14,7 @@ class LivesObject(DrawableObject):
         self.max = num
         self.num = self.max
         self.images = []
+        self.obj_type = "lives"
         for i in range(num):
             self.images.append(ImageObject(self.game, self.filename, self.rect.x, self.rect.y))
             self.images[i].move(self.rect.x + 30 * i, self.rect.y)
@@ -22,6 +23,9 @@ class LivesObject(DrawableObject):
         if self.num > 0:
             self.num -= 1
             self.images.pop()
+
+    def get_type(self) -> str:
+        return self.obj_type
 
     def get_lives_count(self) -> int:
         return self.num
