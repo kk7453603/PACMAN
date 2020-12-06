@@ -14,11 +14,12 @@ class Icon(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = location
 
-    def set_color(self, img, color):
+    @staticmethod
+    def set_color(img, color):
         for x in range(img.get_width()):
             for y in range(img.get_height()):
-                color.a = img.get_at((x, y)).a  # Preserve the alpha value.
-                img.set_at((x, y), color)  # Set the color of the pixel.
+                color.a = img.get_at((x, y)).a
+                img.set_at((x, y), color)
 
 
 class Settings(BaseScene):
