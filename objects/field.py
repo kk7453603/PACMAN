@@ -62,7 +62,7 @@ class FieldObject(DrawableObject):
                     pass
                 elif cell == 2:
                     pass
-                elif cell == 1:
+                elif cell == 1 or cell == 4:#места поворота призраков 4
                     x = self.rect.x + self.cell_width * j
                     y = self.rect.y + self.cell_height * i
                     x += 7
