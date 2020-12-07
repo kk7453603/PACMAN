@@ -54,7 +54,7 @@ class GhostBase(CharacterObject):
             j_gh = int(x_ghplane / cell)
             if self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[y_ghplane // 17][x_ghplane // 17] == 4:
                 #print(i_gh, j_gh)
-                self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[0][0] = 4
+                #self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[0][0] = 4
                 if self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[i_gh + 1][j_gh] != 0:
                     if self.direction != "UP":
                         way = round(sqrt(pow(point_i * cell - y_ghplane - cell,2) + pow(point_j * cell - x_ghplane, 2)), 3)
