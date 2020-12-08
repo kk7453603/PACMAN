@@ -26,6 +26,7 @@ class GhostBase(CharacterObject):
         super().__init__(game)
         self.image = self.up_img_resized
         self.status = 'normal'
+        self.obj_type = 'ghost'
 
     def test_move(self) -> None:
         pygame.event.pump()
@@ -47,6 +48,9 @@ class GhostBase(CharacterObject):
             self.rect.x += self.MAX_SPEED
             if self.status == 'normal':
                 self.image = self.right_img_resized
+
+    def get_type(self) -> str:
+        return self.obj_type
 
     def process_logic(self) -> None:
         pygame.event.pump()
