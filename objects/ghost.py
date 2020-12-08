@@ -16,37 +16,19 @@ class GhostBase(CharacterObject):
     ]
     filename: str = filenames[1]
 
-    up_img_resized: pygame.Surface = pygame.transform.scale(pygame.image.load(filenames[0]), (35, 35))
-    down_img_resized: pygame.Surface = pygame.transform.scale(pygame.image.load(filenames[1]), (35, 35))
-    left_img_resized: pygame.Surface = pygame.transform.scale(pygame.image.load(filenames[2]), (35, 35))
-    right_img_resized: pygame.Surface = pygame.transform.scale(pygame.image.load(filenames[3]), (35, 35))
-    scared_img_resized: pygame.Surface = pygame.transform.scale(pygame.image.load(filenames[4]), (35, 35))
+    up_img_resized: pygame.Surface = pygame.transform.scale(pygame.image.load(filenames[0]), (14, 14))
+    down_img_resized: pygame.Surface = pygame.transform.scale(pygame.image.load(filenames[1]), (14, 14))
+    left_img_resized: pygame.Surface = pygame.transform.scale(pygame.image.load(filenames[2]), (14, 14))
+    right_img_resized: pygame.Surface = pygame.transform.scale(pygame.image.load(filenames[3]), (14, 14))
+    scared_img_resized: pygame.Surface = pygame.transform.scale(pygame.image.load(filenames[4]), (14, 14))
 
-    def __init__(self, game) -> None:
-        super().__init__(game)
+    def __init__(self, game, x, y) -> None:
+        super().__init__(game, x, y)
         self.image = self.up_img_resized
         self.status = 'normal'
 
     def test_move(self) -> None:
-        pygame.event.pump()
-        keys = pygame.key.get_pressed()
-
-        if keys[pygame.K_DOWN]:
-            self.rect.y += self.MAX_SPEED
-            if self.status == 'normal':
-                self.image = self.down_img_resized
-        elif keys[pygame.K_UP]:
-            self.rect.y -= self.MAX_SPEED
-            if self.status == 'normal':
-                self.image = self.up_img_resized
-        elif keys[pygame.K_LEFT]:
-            self.rect.x -= self.MAX_SPEED
-            if self.status == 'normal':
-                self.image = self.left_img_resized
-        elif keys[pygame.K_RIGHT]:
-            self.rect.x += self.MAX_SPEED
-            if self.status == 'normal':
-                self.image = self.right_img_resized
+        pass
 
     def process_logic(self) -> None:
         pygame.event.pump()

@@ -6,6 +6,7 @@ from objects.base import DrawableObject
 from fields.default import fieldArr
 from constants import Color
 from .seed import SeedObject
+from .orange_ghost import OrangeGhostObject
 
 
 class FieldObject(DrawableObject):
@@ -55,12 +56,23 @@ class FieldObject(DrawableObject):
     def get_borders_cell(self):
         return self.rect.x, self.rect.x + len(self.field[0]) * self.cell_width, self.cell_width
 
-    def add_seeds(self,obj):
+    def add_ghost(self, obj):
         for (i, row) in enumerate(self.field):
             for (j, cell) in enumerate(row):
-                if cell == 0:
+                if cell == 0 or cell == 1 or cell == 2 or cell == 3:
                     pass
-                elif cell == 2:
+                elif cell == 4:
+                    x = self.rect.x + self.cell_width * j
+                    y = self.rect.y + self.cell_height * i
+                    x += 4
+                    y += 4
+                    obj.append(OrangeGhostObject(self.game, x, y))
+        return obj
+
+    def add_seeds(self, obj):
+        for (i, row) in enumerate(self.field):
+            for (j, cell) in enumerate(row):
+                if cell == 0 or cell == 2 or cell == 4:
                     pass
                 elif cell == 1:
                     x = self.rect.x + self.cell_width * j

@@ -14,19 +14,19 @@ class PauseScene(BaseScene):
             x=self.game.WIDTH // 2, y=self.game.HEIGHT // 2 - 200
         )
         self.button_resume = ButtonObject(
-            self.game,
-            self.game.WIDTH // 2 - 100, self.game.HEIGHT // 2 - 75, 200, 50,
-            Color.RED, self.go_menu, "Продолжить"
+            game=self.game,
+            x=self.game.WIDTH // 2 - 100, y=self.game.HEIGHT // 2 - 75, width=200, height=50,
+            color=Color.RED, function=self.go_menu, text="Продолжить"
         )
         self.button_restart = ButtonObject(
-            self.game,
-            self.game.WIDTH // 2 - 100, self.game.HEIGHT // 2, 200, 50,
-            Color.RED, self.start_game, "Заново"
+            game=self.game,
+            x=self.game.WIDTH // 2 - 100, y=self.game.HEIGHT // 2, width=200, height=50,
+            color=Color.RED, function=self.start_game, text="Заново"
         )
         self.button_menu = ButtonObject(
-            self.game,
-            self.game.WIDTH // 2 - 100, self.game.HEIGHT // 2 + 75, 200, 50,
-            Color.RED, self.back_to_menu, "Меню"
+            game=self.game,
+            x=self.game.WIDTH // 2 - 100, y=self.game.HEIGHT // 2 + 75, width=200, height=50,
+            color=Color.RED, function=self.back_to_menu, text="Меню"
         )
 
         self.objects.append(self.text)
