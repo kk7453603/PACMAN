@@ -9,3 +9,4 @@ from .seed import SeedObject
 from .score import ScoreObject
 from .lives import LivesObject
 from .table import TableObject
+from .orange_ghost import OrangeGhostObject
