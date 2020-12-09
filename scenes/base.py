@@ -38,7 +38,6 @@ class BaseScene:
         for item in self.objects:
             item.process_draw()
 
-
     def additional_draw(self) -> None:
         pass
 
