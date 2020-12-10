@@ -26,7 +26,6 @@ class MainScene(BaseScene):
         self.field = FieldObject(self.game, 70, 35, 17, 17)
         self.objects.append(self.field)
         self.objects = self.field.add_seeds(self.objects)
-        # self.objects = self.field.add_ghost(self.objects)
         self.pacman = PacmanObject(self.game, 300, 425)
         self.objects.append(self.pacman)
         self.orange_ghost = OrangeGhostObject(self.game, 272, 273)
