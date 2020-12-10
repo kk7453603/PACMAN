@@ -25,9 +25,11 @@ class MainScene(BaseScene):
         self.field = FieldObject(self.game, 70, 35, 17, 17)
         self.objects.append(self.field)
         self.objects = self.field.add_seeds(self.objects)
-        self.objects = self.field.add_ghost(self.objects)
+        # self.objects = self.field.add_ghost(self.objects)
         self.pacman = PacmanObject(self.game, 300, 425)
         self.objects.append(self.pacman)
+        self.orange_ghost = OrangeGhostObject(self.game, 275, 278)
+        self.objects.append(self.orange_ghost)
 
     def update_texts(self) -> None:
         self.nickname.update_text(self.get_nickname_text())

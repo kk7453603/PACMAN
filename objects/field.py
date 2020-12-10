@@ -56,6 +56,7 @@ class FieldObject(DrawableObject):
     def get_borders_cell(self):
         return self.rect.x, self.rect.x + len(self.field[0]) * self.cell_width, self.cell_width
 
+    '''
     def add_ghost(self, obj):
         for (i, row) in enumerate(self.field):
             for (j, cell) in enumerate(row):
@@ -68,6 +69,7 @@ class FieldObject(DrawableObject):
                     y += 4
                     obj.append(OrangeGhostObject(self.game, x, y))
         return obj
+    '''
 
     def add_seeds(self, obj):
         for (i, row) in enumerate(self.field):
