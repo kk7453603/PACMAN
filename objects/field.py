@@ -76,7 +76,7 @@ class FieldObject(DrawableObject):
             for (j, cell) in enumerate(row):
                 if cell == 0 or cell == 2 or cell == 4:
                     pass
-                elif cell == 1:
+                elif cell == 1 or cell == 4:#места поворота призраков 4
                     x = self.rect.x + self.cell_width * j
                     y = self.rect.y + self.cell_height * i
                     x += 7

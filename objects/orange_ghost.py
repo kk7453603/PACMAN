@@ -12,7 +12,7 @@ class OrangeGhostObject(GhostBase):
         get_ghost_path('orange', 'right1.png')
     ]
 
-    up_img_resized: pygame.Surface = pygame.transform.scale(pygame.image.load(filenames[0]), (14, 14))
-    down_img_resized: pygame.Surface = pygame.transform.scale(pygame.image.load(filenames[1]), (14, 14))
-    left_img_resized: pygame.Surface = pygame.transform.scale(pygame.image.load(filenames[2]), (14, 14))
-    right_img_resized: pygame.Surface = pygame.transform.scale(pygame.image.load(filenames[3]), (14, 14))
+    up_img_resized: pygame.Surface = pygame.transform.scale(pygame.image.load(filenames[0]), (17, 17))
+    down_img_resized: pygame.Surface = pygame.transform.scale(pygame.image.load(filenames[1]), (17, 17))
+    left_img_resized: pygame.Surface = pygame.transform.scale(pygame.image.load(filenames[2]), (17, 17))
+    right_img_resized: pygame.Surface = pygame.transform.scale(pygame.image.load(filenames[3]), (17, 17))
