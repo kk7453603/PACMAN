@@ -72,5 +72,6 @@ class MainScene(BaseScene):
 
     def additional_logic(self) -> None:
         self.pacman.collect_seed(self.objects, self.score)
+        self.pacman.collide_ghosts(self.objects)
         self.check_score()
         self.check_game_over()

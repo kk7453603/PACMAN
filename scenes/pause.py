@@ -43,6 +43,9 @@ class PauseScene(BaseScene):
     def go_resume(self) -> None:
         self.game.set_scene(self.game.MAIN_SCENE_INDEX, resume=False)
 
+    def go_final(self) -> None:
+        self.game.set_scene(self.game.GAMEOVER_SCENE_INDEX, resume=False)
+
     def additional_event_check(self, event: pygame.event.Event) -> None:
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             self.game.set_scene(self.game.MAIN_SCENE_INDEX, resume=True)

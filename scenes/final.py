@@ -8,13 +8,14 @@ from scenes import BaseScene
 class FinalScene(BaseScene):
     TEXT_FMT = 'Game over ({})'
     seconds_to_end = 4
+
     def __init__(self, game) -> None:
         self.last_seconds_passed = 0
         super().__init__(game)
         self.update_start_time()
-        self.a = pacman()
-        self.b = ghost()
-        self.c = fiar_ghost()
+        self.pacman = Pacman()
+        self.ghost = Ghost()
+        self.fear_ghost = Fear_ghost()
         self.time_current = datetime.now()
         self.seconds_passed = (self.time_current - self.time_start).seconds
 
@@ -28,7 +29,6 @@ class FinalScene(BaseScene):
         return self.TEXT_FMT.format(self.seconds_to_end - self.last_seconds_passed)
 
     def create_objects(self) -> None:
-
         self.text = TextObject(
             self.game,
             text=self.get_gameover_text_formatted(), color=Color.RED,
@@ -44,19 +44,22 @@ class FinalScene(BaseScene):
             self.objects[0].update_text(self.get_gameover_text_formatted())
         if seconds_passed >= self.seconds_to_end:
             self.game.set_scene(self.game.MENU_SCENE_INDEX)
+
     def process_draw(self) -> None:
         self.screen.fill((17, 14, 61))
-        self.a.process_draw(self.screen)
-        self.b.process_draw(self.screen)
-        self.c.process_draw(self.screen)
+        self.pacman.process_draw(self.screen)
+        self.ghost.process_draw(self.screen)
+        self.fear_ghost.process_draw(self.screen)
         font = pygame.font.Font('images/Final/Shift.ttf', 50)
         text = font.render("GAME OVER", False, (255, 255, 255))
         self.screen.blit(text, (75, 225))
+
     def process_logic(self) -> None:
-        self.a.process_logic()
-        self.b.process_logic()
-        self.c.process_logic()
+        self.pacman.process_logic()
+        self.ghost.process_logic()
+        self.fear_ghost.process_logic()
         self.additional_logic()
+
     def process_event(self, event: pygame.event.Event) -> None:
         pass
 
@@ -66,7 +69,8 @@ class FinalScene(BaseScene):
     def on_window_resize(self) -> None:
         self.text.move_center(x=self.game.WIDTH // 2, y=self.game.HEIGHT // 2)
 
-class pacman:
+
+class Pacman:
     sprites = [pygame.image.load('images/Final/pacman/1.png'),
                pygame.image.load('images/Final/pacman/2.png'),
                pygame.image.load('images/Final/pacman/3.png'),
@@ -86,14 +90,15 @@ class pacman:
 
     def process_logic(self):
         self.tick += 4
-        if (self.tick % 10 == 0):
+        if self.tick % 10 == 0:
             self.img_index += 1
             self.img_index %= 9
 
     def process_draw(self, screen):
-        screen.blit(pygame.transform.scale(pacman.sprites[self.img_index], (125,125)), (85, 320))
+        screen.blit(pygame.transform.scale(Pacman.sprites[self.img_index], (125,125)), (85, 320))
 
-class ghost:
+
+class Ghost:
     sprites = [pygame.image.load('images/Final/gohst/1.png'),
                pygame.image.load('images/Final/gohst/2.png'),
                pygame.image.load('images/Final/gohst/3.png'),
@@ -111,15 +116,15 @@ class ghost:
 
     def process_logic(self):
         self.tick += 5
-        if (self.tick % 10 == 0):
+        if self.tick % 10 == 0:
             self.img_index += 1
             self.img_index %= 9
 
     def process_draw(self, screen):
-        screen.blit(pygame.transform.scale(ghost.sprites[self.img_index], (120,120)), (400, 320))
+        screen.blit(pygame.transform.scale(Ghost.sprites[self.img_index], (120,120)), (400, 320))
 
 
-class fiar_ghost:
+class Fear_ghost:
     sprites = [pygame.image.load('images/Final/fiar_gohst/1.png'),
                pygame.image.load('images/Final/fiar_gohst/2.png'),
                pygame.image.load('images/Final/fiar_gohst/3.png'),
@@ -138,9 +143,9 @@ class fiar_ghost:
 
     def process_logic(self):
         self.tick += 5
-        if (self.tick % 10 == 0):
+        if self.tick % 10 == 0:
             self.img_index += 1
             self.img_index %= 10
 
     def process_draw(self, screen):
-        screen.blit(pygame.transform.scale(fiar_ghost.sprites[self.img_index], (120,120)), (240, 320))
+        screen.blit(pygame.transform.scale(Fear_ghost.sprites[self.img_index], (120,120)), (240, 320))

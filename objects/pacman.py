@@ -131,6 +131,11 @@ class PacmanObject(CharacterObject):
     def process_logic(self) -> None:
         self.move_to_direction()
 
+    def collide_ghosts(self, ghosts):
+        for i in ghosts:
+            if self.collides_with(i) and i.get_type() == "ghost":
+                self.game.set_scene(self.game.GAMEOVER_SCENE_INDEX)
+
     def collect_seed(self, seeds, score):
         for i in seeds:
             if self.collides_with(i) and i.get_type() == "seed":
