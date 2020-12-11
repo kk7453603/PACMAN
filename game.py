@@ -13,7 +13,7 @@ class Game:
     PAUSE_SCENE_INDEX = 3
     HIGH_SCORE_MENU_SCENE_INDEX = 4
     SETTINGS_INDEX = 5
-    current_scene_index = GAMEOVER_SCENE_INDEX
+    current_scene_index = MENU_SCENE_INDEX
     USE_FPS_OVERLAY = False
 
     def __init__(self) -> None:
