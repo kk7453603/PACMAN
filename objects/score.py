@@ -16,6 +16,11 @@ class ScoreObject(TextObject):
     def get_type(self) -> str:
         return self.obj_type
 
+    def cherry_eaten(self) -> None:
+        self.score += self.point_for_energizer * 2 + self.point_for_seed
+        self.update_score()
+
+
     def update_score(self) -> None:
         self.update_text(str(self.score))
 

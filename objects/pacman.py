@@ -142,3 +142,11 @@ class PacmanObject(CharacterObject):
                     i.collected()
                     i.disappearing()
                     score.energizer_eaten()
+
+    def collect_cherry(self, cherries, score):
+        for i in cherries:
+            if self.collides_with(i) and i.get_type() == "cherry":
+                if i.is_available():
+                    i.collected()
+                    i.disappearing()
+                    score.cherry_eaten()

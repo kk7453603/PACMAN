@@ -3,7 +3,7 @@ import pygame
 from objects import FieldObject, PacmanObject, OrangeGhostObject, RedGhostObject
 from objects import GhostBase
 from constants import Color
-from objects import TextObject, ScoreObject, LivesObject
+from objects import TextObject, ScoreObject, LivesObject, CherryObject
 from scenes import BaseScene
 
 
@@ -32,6 +32,8 @@ class MainScene(BaseScene):
         self.objects.append(self.orange_ghost)
         self.red_ghost = RedGhostObject(self.game, 302, 222)
         self.objects.append(self.red_ghost)
+        self.cherry = CherryObject(self.game,300,328)
+        self.objects.append(self.cherry)
 
     def update_texts(self) -> None:
         self.nickname.update_text(self.get_nickname_text())
@@ -74,3 +76,5 @@ class MainScene(BaseScene):
         self.pacman.collect_seed(self.objects, self.score)
         self.check_score()
         self.check_game_over()
+        self.cherry.available_check(self.score)
+        self.pacman.collect_cherry(self.objects,self.score)
