@@ -37,11 +37,11 @@ class GhostBase(CharacterObject):
     def get_type(self) -> str:
         return self.obj_type
 
-    def start_hunt(self, point_i, point_j, cell, x_ghplane ,y_ghplane):
+    def start_hunt(self, point_i, point_j, cell, x_ghplane, y_ghplane):
         self.direction = "UP"
         if y_ghplane == 11 * cell and x_ghplane == 13 * cell:
             way_l = round(sqrt(pow(point_i * cell - y_ghplane, 2) + pow(point_j * cell - x_ghplane + cell, 2)), 3)
-            way_r = round(sqrt(pow(point_i * cell -  y_ghplane, 2) + pow(point_j * cell - x_ghplane - cell, 2)), 3)
+            way_r = round(sqrt(pow(point_i * cell - y_ghplane, 2) + pow(point_j * cell - x_ghplane - cell, 2)), 3)
             if way_r > way_l:
                 self.direction = "LEFT"
             else:
@@ -49,64 +49,64 @@ class GhostBase(CharacterObject):
             self.allowed = True
             self.die = False
 
-
-    def move(self, status,point_i: int = 0, point_j: int = 0) -> None:
+    # self.move(self.status, 14, 24)  # в аргументы точку куда идти (self.status, i (это y), j (это x))
+    def move(self, status, point_i: int = 0, point_j: int = 0) -> None:
         cell = self.game.scenes[self.game.MAIN_SCENE_INDEX].field.cell_height
         y_plane = self.game.scenes[self.game.MAIN_SCENE_INDEX].field.rect.y
         x_plane = self.game.scenes[self.game.MAIN_SCENE_INDEX].field.rect.x
-
         x_ghplane = self.rect.x - x_plane
         y_ghplane = self.rect.y - y_plane
-
         self.allowed = True
-
         if x_ghplane == 13 * cell and y_ghplane == 13 * cell:
             self.start_hunt(point_i, point_j, cell, x_ghplane, y_ghplane)
-
         if self.die:
             self.allowed = False
             self.start_hunt(point_i, point_j, cell, x_ghplane, y_ghplane)
-
         if y_ghplane == cell * 14 and (x_ghplane < cell * 5 or x_ghplane > cell * 22):
             self.allowed = False
-
         if self.rect.x < x_plane:
             self.rect.x = x_plane + cell * len(self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[0]) - 18
         if self.rect.x > x_plane + cell * len(self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[0]) - 17:
             self.rect.x = x_plane
-
-        ways = [10000,10000,10000,10000]
+        ways = [10000, 10000, 10000, 10000]
         if x_ghplane % cell == 0 and y_ghplane % cell == 0 and self.allowed:
             i_gh = int(y_ghplane / cell)
             j_gh = int(x_ghplane / cell)
             if self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[y_ghplane // 17][x_ghplane // 17] == 4:
-                #print(i_gh, j_gh)
-                #self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[0][0] = 4
+                # print(i_gh, j_gh)
+                # self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[0][0] = 4
                 if self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[i_gh + 1][j_gh] != 0:
                     if self.direction != "UP":
-                        way = round(sqrt(pow(point_i * cell - y_ghplane - cell,2) + pow(point_j * cell - x_ghplane, 2)), 3)
+                        way = round(
+                            sqrt(pow(point_i * cell - y_ghplane - cell, 2) + pow(point_j * cell - x_ghplane, 2)), 3)
                         ways[0] = way
-                        #print("D.", way)
-                else: ways[0] = 100000
+                        # print("D.", way)
+                else:
+                    ways[0] = 100000
                 if self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[i_gh][j_gh + 1] != 0:
                     if self.direction != "LEFT":
-                        way = round(sqrt(pow(point_i * cell -  y_ghplane, 2) + pow(point_j * cell - x_ghplane - cell, 2)), 3)
+                        way = round(
+                            sqrt(pow(point_i * cell - y_ghplane, 2) + pow(point_j * cell - x_ghplane - cell, 2)), 3)
                         ways[1] = way
-                        #print("R.", way)
-                else: ways[1] = 100000
+                        # print("R.", way)
+                else:
+                    ways[1] = 100000
                 if self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[i_gh - 1][j_gh] != 0:
                     if self.direction != "DOWN":
-                        way = round(sqrt(pow(point_i * cell - y_ghplane + cell, 2) + pow(point_j * cell - x_ghplane, 2)), 3)
+                        way = round(
+                            sqrt(pow(point_i * cell - y_ghplane + cell, 2) + pow(point_j * cell - x_ghplane, 2)), 3)
                         ways[2] = way
-                        #print("U.", way)
-                else: ways[2] = 100000
+                        # print("U.", way)
+                else:
+                    ways[2] = 100000
                 if self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[i_gh][j_gh - 1] != 0:
                     if self.direction != "RIGHT":
-                        way = round(sqrt(pow(point_i * cell - y_ghplane, 2) + pow(point_j * cell - x_ghplane + cell, 2)), 3)
+                        way = round(
+                            sqrt(pow(point_i * cell - y_ghplane, 2) + pow(point_j * cell - x_ghplane + cell, 2)), 3)
                         ways[3] = way
-                        #print("L.", way)
-                else: ways[3] = 100000
-
+                        # print("L.", way)
+                else:
+                    ways[3] = 100000
                 minInd = ways.index(min(ways))
                 if minInd == 0 and self.direction != "UP":
                     self.direction = "DOWN"
@@ -130,37 +130,26 @@ class GhostBase(CharacterObject):
                             self.direction = "LEFT"
         if self.status == 'normal':
             if self.direction == "DOWN":
-                    self.image = self.down_img_resized
+                self.image = self.down_img_resized
             elif self.direction == "UP":
-                    self.image = self.up_img_resized
+                self.image = self.up_img_resized
             elif self.direction == "LEFT":
-                    self.image = self.left_img_resized
+                self.image = self.left_img_resized
             elif self.direction == "RIGHT":
-                    self.image = self.right_img_resized
+                self.image = self.right_img_resized
 
-    def process_logic(self) -> None:
+    def define_direction(self):
         if self.direction == "UP":
             self.speed[0] = 0
             self.speed[1] = -1
-
         if self.direction == "DOWN":
             self.speed[0] = 0
             self.speed[1] = 1
-
         if self.direction == "RIGHT":
             self.speed[0] = 1
             self.speed[1] = 0
-
         if self.direction == "LEFT":
             self.speed[0] = -1
             self.speed[1] = 0
-
         self.rect.x += self.speed[0]
         self.rect.y += self.speed[1]
-
-        if self.status == "normal":
-            point_i = int((self.game.scenes[self.game.MAIN_SCENE_INDEX].pacman.rect.y - self.game.scenes[self.game.MAIN_SCENE_INDEX].field.rect.y) / self.game.scenes[self.game.MAIN_SCENE_INDEX].field.cell_height)
-            point_j = int((self.game.scenes[self.game.MAIN_SCENE_INDEX].pacman.rect.x - self.game.scenes[self.game.MAIN_SCENE_INDEX].field.rect.x) / self.game.scenes[self.game.MAIN_SCENE_INDEX].field.cell_width)
-        #print(point_i,point_j)
-
-        self.move(self.status, 14, 24) #в аргументы точку куда идти(self.status, i,j)

@@ -13,6 +13,7 @@ class Background(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = location
 
+
 class Logo(pygame.sprite.Sprite):
     def __init__(self, image_file, location):
         pygame.sprite.Sprite.__init__(self)
@@ -59,7 +60,6 @@ class MenuScene(BaseScene):
         self.button_start.move(self.game.WIDTH // 2 - 100, self.game.HEIGHT // 2 - 25 - 25 - 50)
         self.button_high_score_menu.move(self.game.WIDTH // 2 - 100, self.game.HEIGHT // 2 - 25)
         self.button_exit.move(self.game.WIDTH // 2 - 100, self.game.HEIGHT // 2 + 25 + 25)
-
 
     def additional_draw(self) -> None:
         self.background = Background('images/menu/background.jpg', [0, 0])
