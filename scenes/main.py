@@ -33,9 +33,6 @@ class MainScene(BaseScene):
         self.red_ghost = RedGhostObject(self.game, 302, 222)
         self.objects.append(self.red_ghost)
 
-        self.ghost = GhostBase(self.game, 478, 52)
-        self.objects.append(self.ghost)
-
     def update_texts(self) -> None:
         self.nickname.update_text(self.get_nickname_text())
         self.nickname.move_center(self.game.WIDTH - self.nickname.rect.width // 2 - 15, 15)
