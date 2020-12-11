@@ -90,6 +90,26 @@ class PacmanObject(CharacterObject):
         return self.obj_type
 
     def move_to_direction(self) -> None:
+        if self.next_direction == "UP" and fieldArr[self.pos_on_field[1] - 1][self.pos_on_field[0]] != 0:
+            self.direction = self.next_direction
+            self.angle = self.next_angle
+            self.speed = self.next_speed
+            self.next_direction = 'None'
+        elif self.next_direction == "DOWN" and fieldArr[self.pos_on_field[1] + 1][self.pos_on_field[0]] != 0:
+            self.direction = self.next_direction
+            self.angle = self.next_angle
+            self.speed = self.next_speed
+            self.next_direction = 'None'
+        elif self.next_direction == "LEFT" and fieldArr[self.pos_on_field[1]][self.pos_on_field[0] - 1] != 0:
+            self.direction = self.next_direction
+            self.angle = self.next_angle
+            self.speed = self.next_speed
+            self.next_direction = 'None'
+        elif self.next_direction == "RIGHT" and fieldArr[self.pos_on_field[1]][self.pos_on_field[0] + 1] != 0:
+            self.direction = self.next_direction
+            self.angle = self.next_angle
+            self.speed = self.next_speed
+            self.next_direction = 'None'
         if self.direction == "UP":
             if fieldArr[self.pos_on_field[1]][self.pos_on_field[0]] == 0:
                 self.rect.y = (self.pos_on_field[1] + 1) * 17 + 35 + 2
