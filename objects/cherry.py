@@ -44,7 +44,6 @@ class CherryObject(CharacterObject):
            self.ticks+=1
 
     def available_check(self,score):
-        print(self.temp_available)
         self.check_ticks()
 
         if score.get_score() == 370 and not self.isAvailable and not self.checked:
