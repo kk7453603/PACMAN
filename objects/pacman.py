@@ -21,31 +21,61 @@ class PacmanObject(CharacterObject):
         self.angle = 0
         self.speed[0] = 0
         self.speed[1] = 0
+
+        self.is_collide = False
+        self.next_direction = "None"
+        self.next_angle = 0
+        self.next_speed = [0, 0]
+
         self.radius = self.rect.width // 2
         self.obj_type = "pacman"
 
     def process_event(self, event: pygame.event.Event) -> None:
         if event.type == pygame.KEYDOWN:
-            if (event.key == pygame.K_w or event.key == pygame.K_UP) and fieldArr[self.pos_on_field[1] - 1][self.pos_on_field[0]] != 0:
-                self.direction = "UP"
-                self.angle = 270
-                self.speed[0] = 0
-                self.speed[1] = -2
-            elif (event.key == pygame.K_s or event.key == pygame.K_DOWN) and fieldArr[self.pos_on_field[1] + 1][self.pos_on_field[0]] != 0:
-                self.direction = "DOWN"
-                self.angle = 90
-                self.speed[0] = 0
-                self.speed[1] = 2
-            elif (event.key == pygame.K_a or event.key == pygame.K_LEFT) and fieldArr[self.pos_on_field[1]][self.pos_on_field[0] - 1] != 0:
-                self.direction = "LEFT"
-                self.angle = 0
-                self.speed[0] = -2
-                self.speed[1] = 0
-            elif (event.key == pygame.K_d or event.key == pygame.K_RIGHT) and fieldArr[self.pos_on_field[1]][self.pos_on_field[0] + 1] != 0:
-                self.direction = "RIGHT"
-                self.angle = 180
-                self.speed[0] = 2
-                self.speed[1] = 0
+            if event.key == pygame.K_w or event.key == pygame.K_UP:
+                if fieldArr[self.pos_on_field[1] - 1][self.pos_on_field[0]] != 0:
+                    self.direction = "UP"
+                    self.angle = 270
+                    self.speed[0] = 0
+                    self.speed[1] = -2
+                else:
+                    self.next_direction = "UP"
+                    self.next_angle = 270
+                    self.next_speed[0] = 0
+                    self.next_speed[1] = -2
+            elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
+                if fieldArr[self.pos_on_field[1] + 1][self.pos_on_field[0]] != 0:
+                    self.direction = "DOWN"
+                    self.angle = 90
+                    self.speed[0] = 0
+                    self.speed[1] = 2
+                else:
+                    self.next_direction = "DOWN"
+                    self.next_angle = 90
+                    self.next_speed[0] = 0
+                    self.next_speed[1] = 2
+            elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
+                if fieldArr[self.pos_on_field[1]][self.pos_on_field[0] - 1] != 0:
+                    self.direction = "LEFT"
+                    self.angle = 0
+                    self.speed[0] = -2
+                    self.speed[1] = 0
+                else:
+                    self.next_direction = "LEFT"
+                    self.next_angle = 0
+                    self.next_speed[0] = -2
+                    self.next_speed[1] = 0
+            elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+                if fieldArr[self.pos_on_field[1]][self.pos_on_field[0] + 1] != 0:
+                    self.direction = "RIGHT"
+                    self.angle = 180
+                    self.speed[0] = 2
+                    self.speed[1] = 0
+                else:
+                    self.next_direction = "RIGHT"
+                    self.next_angle = 180
+                    self.next_speed[0] = 2
+                    self.next_speed[1] = 0
 
     def rotate_image(self) -> None:
         self.rotated_image = self.image_copy
