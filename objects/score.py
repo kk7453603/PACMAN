@@ -17,7 +17,7 @@ class ScoreObject(TextObject):
         return self.obj_type
 
     def cherry_eaten(self) -> None:
-        self.score += self.point_for_energizer * 2 + self.point_for_seed
+        self.score += self.point_for_energizer * 6
         self.update_score()
 
 
