@@ -10,10 +10,12 @@ class SeedObject(CharacterObject):
         self.type = type
         if self.type == 0:
             self.filename = 'images/map/point.png'
-            self.image_copy = pygame.transform.scale(pygame.image.load(self.filename), (5, 5))
+            self.image_copy = pygame.transform.scale(
+                pygame.image.load(self.filename), (5, 5))
         elif self.type == 1:
             self.filename = 'images/map/tablet.png'
-            self.image_copy = pygame.transform.scale(pygame.image.load(self.filename), (8, 8))
+            self.image_copy = pygame.transform.scale(
+                pygame.image.load(self.filename), (8, 8))
         self.image = self.image_copy
         self.rect = self.image.get_rect()
         super().__init__(game, x, y)
@@ -31,7 +33,8 @@ class SeedObject(CharacterObject):
         if self.isCollected == True and self.isAvailable == True:
             self.isAvailable = False
             self.filename = "images/map/inv_point.png"
-            self.image = pygame.transform.scale(pygame.image.load(self.filename), (2, 2))
+            self.image = pygame.transform.scale(
+                pygame.image.load(self.filename), (2, 2))
 
     def is_available(self) -> bool:
         return self.isAvailable

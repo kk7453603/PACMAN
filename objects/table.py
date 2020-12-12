@@ -45,7 +45,9 @@ class TableObject(DrawableObject):
                                                      is_bold=False,
                                                      color=self.header_color if j == 0 else self.text_color,
                                                      is_italic=self.header_is_italic if j == 0 else False,
-                                                     x=self.rect.x + self.rect.width // 6 * (2 * i + 1),
+                                                     x=self.rect.x +
+                                                     self.rect.width // 6 *
+                                                     (2 * i + 1),
                                                      y=self.rect.y + 55 + 30 * j))
 
     def process_draw(self) -> None:

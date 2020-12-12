@@ -17,7 +17,10 @@ class FieldObject(DrawableObject):
         self.cell_width = cell_width
         self.cell_height = cell_height
         self.obj_type = "filed"
-        self.rect = pygame.rect.Rect(x, y, self.cell_width * len(self.field[0]), self.cell_height * len(self.field))
+        self.rect = pygame.rect.Rect(x,
+                                     y,
+                                     self.cell_width * len(self.field[0]),
+                                     self.cell_height * len(self.field))
 
     def get_type(self) -> str:
         return self.obj_type
@@ -29,7 +32,12 @@ class FieldObject(DrawableObject):
                 if cell == '1':
                     x = self.rect.x + j * self.cell_width
                     y = self.rect.y + x * self.cell_height
-                    pathways.append(pygame.rect.Rect(x, y, self.cell_width, self.cell_height))
+                    pathways.append(
+                        pygame.rect.Rect(
+                            x,
+                            y,
+                            self.cell_width,
+                            self.cell_height))
         return pathways
 
     def get_walls(self) -> List[pygame.rect.Rect]:
@@ -39,7 +47,12 @@ class FieldObject(DrawableObject):
                 if cell == '2':
                     x = self.rect.x + j * self.cell_width
                     y = self.rect.y + x * self.cell_height
-                    walls.append(pygame.rect.Rect(x, y, self.cell_width, self.cell_height))
+                    walls.append(
+                        pygame.rect.Rect(
+                            x,
+                            y,
+                            self.cell_width,
+                            self.cell_height))
         return walls
 
     def process_draw(self) -> None:
@@ -51,10 +64,12 @@ class FieldObject(DrawableObject):
                     color = Color.BLACK
                 x = self.rect.x + self.cell_width * j
                 y = self.rect.y + self.cell_height * i
-                pygame.draw.rect(self.game.screen, color, (x, y, self.cell_width, self.cell_height))
+                pygame.draw.rect(
+                    self.game.screen, color, (x, y, self.cell_width, self.cell_height))
 
     def get_borders_cell(self):
-        return self.rect.x, self.rect.x + len(self.field[0]) * self.cell_width, self.cell_width
+        return self.rect.x, self.rect.x + \
+            len(self.field[0]) * self.cell_width, self.cell_width
 
     def add_seeds(self, obj):
         for (i, row) in enumerate(self.field):

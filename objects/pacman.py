@@ -9,13 +9,16 @@ class PacmanObject(CharacterObject):
 
     def __init__(self, game, x: int = 0, y: int = 0) -> None:
         super().__init__(game, x, y)
-        self.image_copy = pygame.transform.scale(pygame.image.load(self.filename), (16, 16))
+        self.image_copy = pygame.transform.scale(
+            pygame.image.load(self.filename), (16, 16))
         self.image = self.image_copy
         self.rect = self.image.get_rect()
         self.rotated_image = self.image_copy
         self.rect.x = x
         self.rect.y = y
-        self.pos_on_field = [(self.rect.x - 70) // 17, (self.rect.y - 35) // 17]
+        self.pos_on_field = [
+            (self.rect.x - 70) // 17,
+            (self.rect.y - 35) // 17]
         self.direction = "NONE"
         self.angle = 0
         self.speed[0] = 0
@@ -26,7 +29,8 @@ class PacmanObject(CharacterObject):
 
     def process_event(self, event: pygame.event.Event) -> None:
         if event.type == pygame.KEYDOWN:
-            if (event.key == pygame.K_w or event.key == pygame.K_UP) and fieldArr[self.pos_on_field[1] - 1][self.pos_on_field[0]] != 0:
+            if (event.key == pygame.K_w or event.key ==
+                    pygame.K_UP) and fieldArr[self.pos_on_field[1] - 1][self.pos_on_field[0]] != 0:
                 self.direction = "UP"
                 self.angle = 270
                 self.speed[0] = 0
@@ -50,9 +54,11 @@ class PacmanObject(CharacterObject):
     def rotate_image(self) -> None:
         self.rotated_image = self.image_copy
         if self.direction == "RIGHT":
-            self.rotated_image = pygame.transform.flip(self.rotated_image, True, False)
+            self.rotated_image = pygame.transform.flip(
+                self.rotated_image, True, False)
         else:
-            self.rotated_image = pygame.transform.rotate(self.rotated_image, self.angle)
+            self.rotated_image = pygame.transform.rotate(
+                self.rotated_image, self.angle)
             self.rect = self.rotated_image.get_rect(center=self.rect.center)
         self.image = self.rotated_image
 
@@ -71,13 +77,17 @@ class PacmanObject(CharacterObject):
                 self.portal_event()
                 self.rect.x += self.speed[0]
                 self.rect.y += self.speed[1]
-                self.pos_on_field = [(self.rect.x - 70) // 17, (self.rect.y - 35) // 17]
+                self.pos_on_field = [
+                    (self.rect.x - 70) // 17,
+                    (self.rect.y - 35) // 17]
             elif fieldArr[self.pos_on_field[1] - 1][self.pos_on_field[0]] != 0:
                 self.rotate_image()
                 self.portal_event()
                 self.rect.x += self.speed[0]
                 self.rect.y += self.speed[1]
-                self.pos_on_field = [(self.rect.x - 70) // 17, (self.rect.y - 35) // 17]
+                self.pos_on_field = [
+                    (self.rect.x - 70) // 17,
+                    (self.rect.y - 35) // 17]
         elif self.direction == "DOWN":
             self.rect.x = self.pos_on_field[0] * 17 + 70
             if (self.rect.y + self.speed[1] + self.rect.height) % 17 < 2:
@@ -85,13 +95,17 @@ class PacmanObject(CharacterObject):
                 self.portal_event()
                 self.rect.x += self.speed[0]
                 self.rect.y += self.speed[1]
-                self.pos_on_field = [(self.rect.x - 70) // 17, (self.rect.y - 35) // 17]
+                self.pos_on_field = [
+                    (self.rect.x - 70) // 17,
+                    (self.rect.y - 35) // 17]
             elif fieldArr[self.pos_on_field[1] + 1][self.pos_on_field[0]] != 0:
                 self.rotate_image()
                 self.portal_event()
                 self.rect.x += self.speed[0]
                 self.rect.y += self.speed[1]
-                self.pos_on_field = [(self.rect.x - 70) // 17, (self.rect.y - 35) // 17]
+                self.pos_on_field = [
+                    (self.rect.x - 70) // 17,
+                    (self.rect.y - 35) // 17]
         elif self.direction == "LEFT":
             self.rect.y = self.pos_on_field[1] * 17 + 35 + 2
             if (self.rect.x + self.speed[0]) % 17 > 1:
@@ -99,20 +113,26 @@ class PacmanObject(CharacterObject):
                 self.portal_event()
                 self.rect.x += self.speed[0]
                 self.rect.y += self.speed[1]
-                self.pos_on_field = [(self.rect.x - 70) // 17, (self.rect.y - 35) // 17]
+                self.pos_on_field = [
+                    (self.rect.x - 70) // 17,
+                    (self.rect.y - 35) // 17]
             elif fieldArr[self.pos_on_field[1]][self.pos_on_field[0] - 1] != 0:
                 self.rotate_image()
                 self.portal_event()
                 self.rect.x += self.speed[0]
                 self.rect.y += self.speed[1]
-                self.pos_on_field = [(self.rect.x - 70) // 17, (self.rect.y - 35) // 17]
+                self.pos_on_field = [
+                    (self.rect.x - 70) // 17,
+                    (self.rect.y - 35) // 17]
         elif self.direction == "RIGHT":
             if fieldArr[self.pos_on_field[1]][self.pos_on_field[0]] == 8:
                 self.rotate_image()
                 self.portal_event()
                 self.rect.x += self.speed[0]
                 self.rect.y += self.speed[1]
-                self.pos_on_field = [(self.rect.x - 70) // 17, (self.rect.y - 35) // 17]
+                self.pos_on_field = [
+                    (self.rect.x - 70) // 17,
+                    (self.rect.y - 35) // 17]
             elif fieldArr[self.pos_on_field[1]][self.pos_on_field[0] + 1] != 0:
                 self.rect.y = self.pos_on_field[1] * 17 + 35 + 2
                 if (self.rect.x + self.speed[0]) % 17 > 1:
@@ -120,13 +140,17 @@ class PacmanObject(CharacterObject):
                     self.portal_event()
                     self.rect.x += self.speed[0]
                     self.rect.y += self.speed[1]
-                    self.pos_on_field = [(self.rect.x - 70) // 17, (self.rect.y - 35) // 17]
+                    self.pos_on_field = [
+                        (self.rect.x - 70) // 17,
+                        (self.rect.y - 35) // 17]
                 elif fieldArr[self.pos_on_field[1]][self.pos_on_field[0]] != 0:
                     self.rotate_image()
                     self.portal_event()
                     self.rect.x += self.speed[0]
                     self.rect.y += self.speed[1]
-                    self.pos_on_field = [(self.rect.x - 70) // 17, (self.rect.y - 35) // 17]
+                    self.pos_on_field = [
+                        (self.rect.x - 70) // 17,
+                        (self.rect.y - 35) // 17]
 
     def process_logic(self) -> None:
         self.move_to_direction()

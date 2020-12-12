@@ -53,8 +53,10 @@ class GhostBase(CharacterObject):
     def start_hunt(self, point_i, point_j, cell, x_ghplane, y_ghplane):
         self.direction = "UP"
         if y_ghplane == 11 * cell and x_ghplane == 13 * cell:
-            way_l = round(sqrt(pow(point_i * cell - y_ghplane, 2) + pow(point_j * cell - x_ghplane + cell, 2)), 3)
-            way_r = round(sqrt(pow(point_i * cell - y_ghplane, 2) + pow(point_j * cell - x_ghplane - cell, 2)), 3)
+            way_l = round(sqrt(pow(point_i * cell - y_ghplane, 2) +
+                               pow(point_j * cell - x_ghplane + cell, 2)), 3)
+            way_r = round(sqrt(pow(point_i * cell - y_ghplane, 2) +
+                               pow(point_j * cell - x_ghplane - cell, 2)), 3)
             if way_r > way_l:
                 self.direction = "LEFT"
             else:
@@ -73,7 +75,8 @@ class GhostBase(CharacterObject):
         self.direction = self.start_direction
         self.is_home = True
 
-    # self.move(self.status, 14, 24)  # в аргументы точку куда идти (self.status, i (это y), j (это x))
+    # self.move(self.status, 14, 24)  # в аргументы точку куда идти
+    # (self.status, i (это y), j (это x))
     def move(self, status, point_i: int = 0, point_j: int = 0) -> None:
         cell = self.game.scenes[self.game.MAIN_SCENE_INDEX].field.cell_height
         y_plane = self.game.scenes[self.game.MAIN_SCENE_INDEX].field.rect.y
@@ -86,17 +89,21 @@ class GhostBase(CharacterObject):
         if self.die:
             self.allowed = False
             self.start_hunt(point_i, point_j, cell, x_ghplane, y_ghplane)
-        if y_ghplane == cell * 14 and (x_ghplane < cell * 5 or x_ghplane > cell * 22):
+        if y_ghplane == cell * \
+                14 and (x_ghplane < cell * 5 or x_ghplane > cell * 22):
             self.allowed = False
         if self.rect.x < x_plane:
-            self.rect.x = x_plane + cell * len(self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[0]) - 18
-        if self.rect.x > x_plane + cell * len(self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[0]) - 17:
+            self.rect.x = x_plane + cell * \
+                len(self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[0]) - 18
+        if self.rect.x > x_plane + cell * \
+                len(self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[0]) - 17:
             self.rect.x = x_plane
         ways = [10000, 10000, 10000, 10000]
         if x_ghplane % cell == 0 and y_ghplane % cell == 0 and self.allowed:
             i_gh = int(y_ghplane / cell)
             j_gh = int(x_ghplane / cell)
-            if self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[y_ghplane // 17][x_ghplane // 17] == 4:
+            if self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[y_ghplane //
+                                                                        17][x_ghplane // 17] == 4:
                 if self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[i_gh + 1][j_gh] != 0:
                     if self.direction != "UP":
                         way = round(
@@ -135,7 +142,8 @@ class GhostBase(CharacterObject):
                 elif minInd == 3 and self.direction != "RIGHT":
                     self.direction = "LEFT"
             else:
-                if self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[i_gh + self.speed[1]][j_gh + self.speed[0]] == 0:
+                if self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[i_gh +
+                                                                            self.speed[1]][j_gh + self.speed[0]] == 0:
                     if self.speed[0]:
                         if self.game.scenes[self.game.MAIN_SCENE_INDEX].field.field[i_gh - 1][j_gh]:
                             self.direction = "UP"

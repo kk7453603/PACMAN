@@ -16,7 +16,12 @@ class LivesObject(DrawableObject):
         self.images = []
         self.obj_type = "lives"
         for i in range(num):
-            self.images.append(ImageObject(self.game, self.filename, self.rect.x, self.rect.y))
+            self.images.append(
+                ImageObject(
+                    self.game,
+                    self.filename,
+                    self.rect.x,
+                    self.rect.y))
             self.images[i].move(self.rect.x + 30 * i, self.rect.y)
 
     def reduce_lives(self) -> None:
