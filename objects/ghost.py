@@ -173,6 +173,6 @@ class GhostBase(CharacterObject):
         self.rect.y += self.speed[1]
 
     def scare_to_normal(self):
-        if pygame.time.get_ticks() - self.start_time > 10000 or self.is_home:
+        if pygame.time.get_ticks() - self.start_time > 9000 or self.is_home:
             self.status = 'normal'
             self.is_home = False
