@@ -43,7 +43,7 @@ class MainScene(BaseScene):
         self.nickname.move_center(self.game.WIDTH - self.nickname.rect.width // 2 - 15, 15)
         self.lvl.update_text(self.get_lvl_text())
         self.lvl.move_center(60, 15)
-        self.score.move_center(60, 40)
+        self.score.move_center(530, self.game.HEIGHT - 20)
         self.lives.move_center(15, self.game.HEIGHT - 15)
         self.highscore.update_text(self.get_highscore_text())
         self.highscore.move_center(self.game.WIDTH // 2, 15)

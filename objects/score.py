@@ -20,7 +20,6 @@ class ScoreObject(TextObject):
         self.score += self.point_for_energizer * 6
         self.update_score()
 
-
     def update_score(self) -> None:
         self.update_text(str(self.score))
 
