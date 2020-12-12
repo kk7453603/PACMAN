@@ -53,5 +53,5 @@ class PauseScene(BaseScene):
     def on_window_resize(self) -> None:
         self.button_resume.move(self.game.WIDTH // 2 - 100, self.game.HEIGHT // 2 - 20 - 25)
 
-    def back_to_menu(self):
+    def back_to_menu(self) -> None:
         self.game.set_scene(self.game.MENU_SCENE_INDEX, resume=True)
