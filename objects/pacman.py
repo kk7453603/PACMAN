@@ -48,7 +48,7 @@ class PacmanObject(CharacterObject):
                 self.speed[1] = 0
 
     def move_to_default(self):
-        self.direction = 'NONE'
+        self.direction = 'LEFT'
         super().move_to_default()
 
     def rotate_image(self) -> None:

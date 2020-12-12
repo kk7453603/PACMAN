@@ -47,12 +47,12 @@ class MainScene(BaseScene):
                 self.game.set_scene(self.game.PAUSE_SCENE_INDEX)
 
     def on_activate(self) -> None:
-        print("[main_scene] I'm activate!")
         self.pacman.move_to_default()
         self.orange_ghost.move_to_default()
         self.blue_ghost.move_to_default()
         self.pink_ghost.move_to_default()
         self.red_ghost.move_to_default()
+        self.score.move_to_default()
         self.update_texts()
         self.objects = [self.nickname, self.lvl, self.score, self.lives, self.highscore, self.field]
         self.objects += [self.pacman, self.orange_ghost, self.blue_ghost, self.pink_ghost, self.red_ghost, self.cherry]
