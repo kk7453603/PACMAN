@@ -11,3 +11,4 @@ from .lives import LivesObject
 from .table import TableObject
 from .orange_ghost import OrangeGhostObject
 from .red_ghost import RedGhostObject
+from .cherry import CherryObject

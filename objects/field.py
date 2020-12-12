@@ -1,11 +1,12 @@
 from typing import List
-
+import random
 import pygame
 
 from objects.base import DrawableObject
 from fields.default import fieldArr
 from constants import Color
 from .seed import SeedObject
+from .cherry import CherryObject
 
 
 class FieldObject(DrawableObject):
@@ -46,7 +47,7 @@ class FieldObject(DrawableObject):
             for (j, cell) in enumerate(row):
                 if cell == 0:
                     color = Color.BLUE
-                elif cell == 1 or 2 or 3:
+                elif cell == 1 or 2 or 3 or 5:
                     color = Color.BLACK
                 x = self.rect.x + self.cell_width * j
                 y = self.rect.y + self.cell_height * i
@@ -58,7 +59,7 @@ class FieldObject(DrawableObject):
     def add_seeds(self, obj):
         for (i, row) in enumerate(self.field):
             for (j, cell) in enumerate(row):
-                if cell == 0 or cell == 2 or cell == 4:
+                if cell == 0 or cell == 2 or cell == 4 or cell == 5:
                     pass
                 elif cell == 1:
                     x = self.rect.x + self.cell_width * j
