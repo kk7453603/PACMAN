@@ -8,7 +8,6 @@ class PacmanObject(CharacterObject):
     filename = 'images/pacman.png'
 
     def __init__(self, game, x: int = 0, y: int = 0) -> None:
-        # self.rect = self.image.get_rect()
         super().__init__(game, x, y)
         self.image_copy = pygame.transform.scale(pygame.image.load(self.filename), (16, 16))
         self.image = self.image_copy
@@ -23,6 +22,7 @@ class PacmanObject(CharacterObject):
         self.speed[1] = 0
         self.radius = self.rect.width // 2
         self.obj_type = "pacman"
+        self.start_time = 0
 
     def process_event(self, event: pygame.event.Event) -> None:
         if event.type == pygame.KEYDOWN:
@@ -131,10 +131,14 @@ class PacmanObject(CharacterObject):
     def process_logic(self) -> None:
         self.move_to_direction()
 
-    def collide_ghosts(self, ghosts):
+    def collide_ghosts(self, ghosts, score):
         for i in ghosts:
             if self.collides_with(i) and i.get_type() == "ghost":
-                self.game.set_scene(self.game.GAMEOVER_SCENE_INDEX)
+                if i.status == 'normal':
+                    self.game.set_scene(self.game.GAMEOVER_SCENE_INDEX)
+                elif i.status == 'scared':
+                    i.go_home()
+                    score.ghost_eaten()
 
     def collect_seed(self, seeds, score):
         for i in seeds:
@@ -144,6 +148,10 @@ class PacmanObject(CharacterObject):
                     i.disappearing()
                     score.seed_eaten()
                 elif i.is_available() and i.get_seed_type() == 1:
+                    for j in seeds:
+                        if j.get_type() == 'ghost':
+                            j.scare()
+                    self.start_time = pygame.time.get_ticks()
                     i.collected()
                     i.disappearing()
                     score.energizer_eaten()

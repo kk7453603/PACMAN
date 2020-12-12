@@ -19,6 +19,10 @@ class RedGhostObject(GhostBase):
 
     def process_logic(self) -> None:
         self.define_direction()
-        point_i = self.game.scenes[self.game.MAIN_SCENE_INDEX].pacman.pos_on_field[1]
-        point_j = self.game.scenes[self.game.MAIN_SCENE_INDEX].pacman.pos_on_field[0]
-        self.move(self.status, point_i, point_j)
+        if self.status == 'normal':
+            point_i = self.game.scenes[self.game.MAIN_SCENE_INDEX].pacman.pos_on_field[1]
+            point_j = self.game.scenes[self.game.MAIN_SCENE_INDEX].pacman.pos_on_field[0]
+            self.move(self.status, point_i, point_j)
+        elif self.status == 'scared':
+            self.move(self.status, 5, 3)
+            self.scare_to_normal()

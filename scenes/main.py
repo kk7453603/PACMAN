@@ -1,7 +1,6 @@
 import pygame
 
-from objects import FieldObject, PacmanObject, OrangeGhostObject, RedGhostObject
-from objects import GhostBase
+from objects import FieldObject, PacmanObject, OrangeGhostObject, RedGhostObject, SeedObject
 from constants import Color
 from objects import TextObject, ScoreObject, LivesObject
 from scenes import BaseScene
@@ -72,6 +71,6 @@ class MainScene(BaseScene):
 
     def additional_logic(self) -> None:
         self.pacman.collect_seed(self.objects, self.score)
-        self.pacman.collide_ghosts(self.objects)
+        self.pacman.collide_ghosts(self.objects, self.score)
         self.check_score()
         self.check_game_over()

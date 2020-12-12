@@ -12,3 +12,7 @@ def get_image_path(*filepath: str) -> str:
 
 def get_ghost_path(*filepath: str) -> str:
     return get_image_path('ghost', *filepath)
+
+
+def get_eyes_path(*filepath: str) -> str:
+    return get_ghost_path('crazy_ghost', *filepath)
