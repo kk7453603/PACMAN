@@ -11,10 +11,19 @@ class CharacterObject(ImageObject):
         super().__init__(game)
         self.rect.x = x
         self.rect.y = y
+        self.def_pos = (x, y)
         self.speed = speed if speed else [
             get_nonzero_random_value(CharacterObject.MAX_SPEED),
             get_nonzero_random_value(CharacterObject.MAX_SPEED)
         ]
+
+    def move_to_default(self):
+        print(self.rect)
+        print('Go to default pos {}'.format(self.def_pos))
+        print(self.rect)
+        self.rect.x = self.def_pos[0]
+        self.rect.y = self.def_pos[1]
+        # self.move(self.def_pos[0], self.def_pos[1])
 
     def collides_with(self, other) -> bool:
         return pygame.sprite.collide_circle(self, other)

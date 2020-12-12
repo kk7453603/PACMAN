@@ -47,6 +47,10 @@ class GhostBase(CharacterObject):
         self.start_direction = 'LEFT'
         self.is_home = False
 
+    def move_to_default(self):
+        self.direction = 'LEFT'
+        super().move_to_default()
+
     def get_type(self) -> str:
         return self.obj_type
 
