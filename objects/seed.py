@@ -36,5 +36,5 @@ class SeedObject(CharacterObject):
     def is_available(self) -> bool:
         return self.isAvailable
 
-    def collected(self):
+    def collected(self) -> None:
         self.isCollected = True
