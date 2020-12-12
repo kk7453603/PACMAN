@@ -31,7 +31,7 @@ class GhostBase(CharacterObject):
     left_eyes_img_resized: pygame.Surface = pygame.transform.scale(pygame.image.load(filenames[7]), (17, 17))
     right_eyes_img_resized: pygame.Surface = pygame.transform.scale(pygame.image.load(filenames[8]), (17, 17))
 
-    def __init__(self, game, x, y) -> None:
+    def __init__(self, game, x: int, y: int) -> None:
         super().__init__(game, x, y)
         self.start_x = x
         self.start_y = y
@@ -50,7 +50,7 @@ class GhostBase(CharacterObject):
     def get_type(self) -> str:
         return self.obj_type
 
-    def start_hunt(self, point_i, point_j, cell, x_ghplane, y_ghplane):
+    def start_hunt(self, point_i: int, point_j: int, cell: int, x_ghplane: int, y_ghplane: int) -> None:
         self.direction = "UP"
         if y_ghplane == 11 * cell and x_ghplane == 13 * cell:
             way_l = round(sqrt(pow(point_i * cell - y_ghplane, 2) + pow(point_j * cell - x_ghplane + cell, 2)), 3)
@@ -62,7 +62,7 @@ class GhostBase(CharacterObject):
             self.allowed = True
             self.die = False
 
-    def scare(self):
+    def scare(self) -> None:
         self.status = 'scared'
         self.image = self.scared_img_resized
         self.start_time = pygame.time.get_ticks()
@@ -156,7 +156,7 @@ class GhostBase(CharacterObject):
             elif self.direction == "RIGHT":
                 self.image = self.right_img_resized
 
-    def define_direction(self):
+    def define_direction(self) -> None:
         if self.direction == "UP":
             self.speed[0] = 0
             self.speed[1] = -1
@@ -172,7 +172,7 @@ class GhostBase(CharacterObject):
         self.rect.x += self.speed[0]
         self.rect.y += self.speed[1]
 
-    def scare_to_normal(self):
+    def scare_to_normal(self) -> None:
         if pygame.time.get_ticks() - self.start_time > 9000 or self.is_home:
             self.status = 'normal'
             self.is_home = False

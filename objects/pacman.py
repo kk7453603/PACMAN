@@ -131,7 +131,7 @@ class PacmanObject(CharacterObject):
     def process_logic(self) -> None:
         self.move_to_direction()
 
-    def collide_ghosts(self, ghosts, score):
+    def collide_ghosts(self, ghosts: list, score: int) -> None:
         for i in ghosts:
             if self.collides_with(i) and i.get_type() == "ghost":
                 if i.status == 'normal':
@@ -140,7 +140,7 @@ class PacmanObject(CharacterObject):
                     i.go_home()
                     score.ghost_eaten()
 
-    def collect_seed(self, seeds, score):
+    def collect_seed(self, seeds: list, score: int) -> None:
         for i in seeds:
             if self.collides_with(i) and i.get_type() == "seed":
                 if i.is_available() and i.get_seed_type() == 0:
@@ -156,7 +156,7 @@ class PacmanObject(CharacterObject):
                     i.disappearing()
                     score.energizer_eaten()
 
-    def collect_cherry(self, cherries, score):
+    def collect_cherry(self, cherries: list, score: int) -> None:
         for i in cherries:
             if self.collides_with(i) and i.get_type() == "cherry":
                 if i.is_available():

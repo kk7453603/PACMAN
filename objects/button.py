@@ -45,12 +45,12 @@ class ButtonObject(DrawableObject):
     def no_action(self) -> None:
         pass
 
-    def set_text(self, text) -> None:
+    def set_text(self, text: str) -> None:
         self.text = text
         self.button.text = text
         self.button.render_text()
 
-    def process_event(self, event) -> None:
+    def process_event(self, event: list) -> None:
         self.button.check_event(event)
 
     def process_draw(self) -> None:

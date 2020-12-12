@@ -6,7 +6,7 @@ from objects.character import CharacterObject
 class CherryObject(CharacterObject):
     filename = 'images/map/fruits/cherry.png'
 
-    def __init__(self, game, x: int = 0, y: int = 0):
+    def __init__(self, game, x: int = 0, y: int = 0) -> None:
         self.inv_pic = pygame.transform.scale(pygame.image.load("images/map/inv_point.png"), (2, 2))
         self.vis_pic = pygame.transform.scale(pygame.image.load(self.filename), (10, 10))
         self.image = self.vis_pic
@@ -30,20 +30,20 @@ class CherryObject(CharacterObject):
             self.filename = "images/map/inv_point.png"
             self.image = pygame.transform.scale(pygame.image.load(self.filename), (2, 2))
 
-    def availability_pic(self):
+    def availability_pic(self) -> None:
         if self.isAvailable:
             self.image = self.vis_pic
         elif not self.isAvailable:
             self.image = self.inv_pic
 
-    def check_ticks(self):
+    def check_ticks(self) -> None:
         if self.ticks >=222:
             self.ticks = 0
             self.temp_available = False
         if self.temp_available:
            self.ticks += 1
 
-    def available_check(self,score):
+    def available_check(self, score: list) -> None:
         self.check_ticks()
 
         if score.get_score() == 370 and not self.isAvailable and not self.checked:
@@ -62,7 +62,7 @@ class CherryObject(CharacterObject):
     def is_available(self) -> bool:
         return self.isAvailable
 
-    def collected(self):
+    def collected(self) -> None:
         self.cherries += 1
         self.isCollected = True
         self.temp_available = False

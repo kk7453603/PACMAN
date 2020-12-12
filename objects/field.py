@@ -56,7 +56,7 @@ class FieldObject(DrawableObject):
     def get_borders_cell(self):
         return self.rect.x, self.rect.x + len(self.field[0]) * self.cell_width, self.cell_width
 
-    def add_seeds(self, obj):
+    def add_seeds(self, obj: list) -> None:
         for (i, row) in enumerate(self.field):
             for (j, cell) in enumerate(row):
                 if cell == 0 or cell == 2 or cell == 4 or cell == 5:

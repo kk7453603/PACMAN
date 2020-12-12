@@ -6,7 +6,7 @@ from objects.character import CharacterObject
 class SeedObject(CharacterObject):
     filename = 'images/map/point.png'
 
-    def __init__(self, game, type, x: int = 0, y: int = 0):
+    def __init__(self, game, type, x: int = 0, y: int = 0) -> None:
         self.type = type
         if self.type == 0:
             self.filename = 'images/map/point.png'
@@ -36,5 +36,5 @@ class SeedObject(CharacterObject):
     def is_available(self) -> bool:
         return self.isAvailable
 
-    def collected(self):
+    def collected(self) -> None:
         self.isCollected = True

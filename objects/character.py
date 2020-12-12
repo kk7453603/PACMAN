@@ -16,7 +16,7 @@ class CharacterObject(ImageObject):
             get_nonzero_random_value(CharacterObject.MAX_SPEED)
         ]
 
-    def collides_with(self, other) -> bool:
+    def collides_with(self, other: list) -> bool:
         return pygame.sprite.collide_circle(self, other)
 
     def portal_event(self):
