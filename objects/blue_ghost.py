@@ -12,7 +12,7 @@ class BlueGhostObject(GhostBase):
                           self.game.scenes[self.game.MAIN_SCENE_INDEX].pacman.rect.y) // 17
             point_i = self.game.scenes[self.game.MAIN_SCENE_INDEX].pacman.pos_on_field[1] + distanse_y
             point_j = self.game.scenes[self.game.MAIN_SCENE_INDEX].pacman.pos_on_field[0] + distanse_x
-            self.move(self.status, point_i, point_j)
+            self.move_ghost(self.status, point_i, point_j)
         elif self.status == 'scared':
-            self.move(self.status, 26, 2)
+            self.move_ghost(self.status, 26, 2)
             self.scare_to_normal()

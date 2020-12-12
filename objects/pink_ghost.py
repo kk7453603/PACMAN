@@ -43,7 +43,7 @@ class PinkGhostObject(GhostBase):
                 point_j = self.game.scenes[self.game.MAIN_SCENE_INDEX].pacman.pos_on_field[0] + 4
                 if point_j > 27:
                     point_j = 27
-            self.move(self.status, point_i, point_j)
+            self.move_ghost(self.status, point_i, point_j)
         elif self.status == 'scared':
-            self.move(self.status, 4, 26)
+            self.move_ghost(self.status, 4, 26)
             self.scare_to_normal()

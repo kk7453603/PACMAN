@@ -28,10 +28,10 @@ class OrangeGhostObject(GhostBase):
         if self.status == 'normal':
             if distance > 4:
                 # Red Ghost Behavior
-                self.move(self.status, point_i, point_j)
+                self.move_ghost(self.status, point_i, point_j)
             else:
                 # Left Down Corner
-                self.move(self.status, 30 * 17, 2 * 17)
+                self.move_ghost(self.status, 30 * 17, 2 * 17)
         elif self.status == 'scared':
-            self.move(self.status, 29, 26)
+            self.move_ghost(self.status, 29, 26)
             self.scare_to_normal()

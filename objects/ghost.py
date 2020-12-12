@@ -74,7 +74,7 @@ class GhostBase(CharacterObject):
         self.is_home = True
 
     # self.move(self.status, 14, 24)  # в аргументы точку куда идти (self.status, i (это y), j (это x))
-    def move(self, status, point_i: int = 0, point_j: int = 0) -> None:
+    def move_ghost(self, status, point_i: int = 0, point_j: int = 0) -> None:
         cell = self.game.scenes[self.game.MAIN_SCENE_INDEX].field.cell_height
         y_plane = self.game.scenes[self.game.MAIN_SCENE_INDEX].field.rect.y
         x_plane = self.game.scenes[self.game.MAIN_SCENE_INDEX].field.rect.x
