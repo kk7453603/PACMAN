@@ -22,6 +22,7 @@ class RecordCounter:
 
 
     def ret_data(self):
+        #
         self.sort_scores()
         sl={"names":[i[0] for i in self.ms],"scores":[i[1] for i in self.ms],"times":[i[2] for i in self.ms]}
         return sl
