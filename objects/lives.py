@@ -19,6 +19,9 @@ class LivesObject(DrawableObject):
             self.images.append(ImageObject(self.game, self.filename, self.rect.x, self.rect.y))
             self.images[i].move(self.rect.x + 30 * i, self.rect.y)
 
+    def start(self):
+        self.num = self.max
+
     def reduce_lives(self) -> None:
         if self.num > 0:
             self.num -= 1

@@ -20,23 +20,16 @@ class MainScene(BaseScene):
         self.score = ScoreObject(self.game, color=Color.RED)
         self.lives = LivesObject(self.game, x=15, y=self.game.HEIGHT - 30)
         self.highscore = TextObject(self.game, text=self.get_highscore_text(), color=Color.RED, x=0, y=0)
-        self.update_texts()
-        self.objects += [self.nickname, self.lvl, self.score, self.lives, self.highscore]
         self.field = FieldObject(self.game, 70, 35, 17, 17)
-        self.objects.append(self.field)
-        self.objects = self.field.add_seeds(self.objects)
         self.pacman = PacmanObject(self.game, 300, 427)
-        self.objects.append(self.pacman)
         self.orange_ghost = OrangeGhostObject(self.game, 272, 273)
-        self.objects.append(self.orange_ghost)
         self.blue_ghost = BlueGhostObject(self.game, 306, 273)
-        self.objects.append(self.blue_ghost)
         self.pink_ghost = PinkGhostObject(self.game, 340, 273)
-        self.objects.append(self.pink_ghost)
         self.red_ghost = RedGhostObject(self.game, 302, 222)
-        self.objects.append(self.red_ghost)
         self.cherry = CherryObject(self.game, 300, 328)
-        self.objects.append(self.cherry)
+        self.objects = [self.nickname, self.lvl, self.score, self.lives, self.highscore, self.field]
+        self.objects += [self.pacman, self.orange_ghost, self.blue_ghost, self.pink_ghost, self.red_ghost, self.cherry]
+        self.objects = self.field.add_seeds(self.objects)
 
     def update_texts(self) -> None:
         self.nickname.update_text(self.get_nickname_text())
@@ -54,7 +47,16 @@ class MainScene(BaseScene):
                 self.game.set_scene(self.game.PAUSE_SCENE_INDEX)
 
     def on_activate(self) -> None:
+        self.pacman.move_to_default()
+        self.orange_ghost.move_to_default()
+        self.blue_ghost.move_to_default()
+        self.pink_ghost.move_to_default()
+        self.red_ghost.move_to_default()
+        self.score.move_to_default()
         self.update_texts()
+        self.objects = [self.nickname, self.lvl, self.score, self.lives, self.highscore, self.field]
+        self.objects += [self.pacman, self.orange_ghost, self.blue_ghost, self.pink_ghost, self.red_ghost, self.cherry]
+        self.objects = self.field.add_seeds(self.objects)
 
     def get_nickname_text(self) -> str:
         return self.nickname_text

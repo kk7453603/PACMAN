@@ -13,6 +13,12 @@ class ScoreObject(TextObject):
         self.update_score()
         self.obj_type = "score"
 
+    def move_to_default(self):
+        self.score = 0
+        self.point_for_seed = 10
+        self.point_for_energizer = 50
+        self.point_for_ghost = 200
+
     def get_type(self) -> str:
         return self.obj_type
 
