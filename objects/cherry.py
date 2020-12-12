@@ -31,17 +31,17 @@ class CherryObject(CharacterObject):
             self.image = pygame.transform.scale(pygame.image.load(self.filename), (2, 2))
 
     def availability_pic(self):
-        if self.isAvailable == True:
+        if self.isAvailable:
             self.image = self.vis_pic
-        elif self.isAvailable == False:
+        elif not self.isAvailable:
             self.image = self.inv_pic
 
     def check_ticks(self):
         if self.ticks >=222:
             self.ticks = 0
             self.temp_available = False
-        if self.temp_available == True:
-           self.ticks+=1
+        if self.temp_available:
+           self.ticks += 1
 
     def available_check(self,score):
         self.check_ticks()
@@ -63,6 +63,6 @@ class CherryObject(CharacterObject):
         return self.isAvailable
 
     def collected(self):
-        self.cherries +=1
+        self.cherries += 1
         self.isCollected = True
         self.temp_available = False

@@ -1,6 +1,6 @@
 import pygame
 
-from objects import FieldObject, PacmanObject, OrangeGhostObject, RedGhostObject, SeedObject
+from objects import FieldObject, PacmanObject, OrangeGhostObject, RedGhostObject, PinkGhostObject, BlueGhostObject
 from constants import Color
 from objects import TextObject, ScoreObject, LivesObject, CherryObject
 from scenes import BaseScene
@@ -29,9 +29,13 @@ class MainScene(BaseScene):
         self.objects.append(self.pacman)
         self.orange_ghost = OrangeGhostObject(self.game, 272, 273)
         self.objects.append(self.orange_ghost)
+        self.blue_ghost = BlueGhostObject(self.game, 306, 273)
+        self.objects.append(self.blue_ghost)
+        self.pink_ghost = PinkGhostObject(self.game, 340, 273)
+        self.objects.append(self.pink_ghost)
         self.red_ghost = RedGhostObject(self.game, 302, 222)
         self.objects.append(self.red_ghost)
-        self.cherry = CherryObject(self.game,300,328)
+        self.cherry = CherryObject(self.game, 300, 328)
         self.objects.append(self.cherry)
 
     def update_texts(self) -> None:
